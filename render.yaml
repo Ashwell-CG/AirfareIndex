@@ -1,0 +1,19 @@
+# Render Blueprint for the AirfareIndex API (backend). The frontend is deployed separately (see frontend/vercel.json).
+# Dashboard: New + > Blueprint > select this repository. Then set AIRFARE_CORS_ORIGINS (the one value marked "sync: false").
+services:
+  - type: web
+    name: airfareindex-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free                # free instances sleep after ~15 min idle; the first request then takes ~30-60 s to wake and load the model
+    region: singapore         # closest Render region to Indian users; change if you prefer
+    healthCheckPath: /ready   # 200 only when the model is loaded
+    autoDeploy: true
+    envVars:
+      - key: AIRFARE_ENV
+        value: production
+      - key: AIRFARE_CORS_ORIGINS
+        sync: false           # exact frontend origin, e.g. https://airfareindex.vercel.app (no trailing slash, no wildcard)
+      - key: AIRFARE_LOG_LEVEL
+        value: INFO

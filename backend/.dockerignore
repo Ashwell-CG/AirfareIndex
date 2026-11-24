@@ -1,0 +1,9 @@
+# allow-list: ignore everything, then re-include only what the image copies
+*
+!requirements-prod.txt
+!app/
+!ml/
+!saved_models/final/
+!data/processed/supported_options.json
+**/__pycache__
+**/*.pyc

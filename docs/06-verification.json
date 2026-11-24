@@ -1,0 +1,68 @@
+{
+ "phase5_artifacts": {
+  "files": 35,
+  "mismatched_or_missing": [],
+  "all_match": true
+ },
+ "raw_dataset_E": {
+  "all_match": true
+ },
+ "freeze": {
+  "multiseed_used_frozen_sha256": true,
+  "frozen_written_before_multiseed_results": true,
+  "frozen_written_before_candidate_training": true,
+  "frozen_sha256": "8ce0e37aac6249eae7b94efe6285aaa3965cff02675baaa9409f1c5e7f63aa87"
+ },
+ "held_out_codes_never_in_training": {
+  "seed_recipe_pairs_checked": 20,
+  "violations": []
+ },
+ "seeds_recorded": [
+  7001,
+  7002,
+  7003,
+  7004,
+  7005,
+  7006,
+  7007,
+  7008,
+  7009,
+  7010
+ ],
+ "final_model_fresh_process": {
+  "n": 5000,
+  "finite_positive": true,
+  "identical_across_two_loads": true,
+  "health_endpoint": {
+   "status": "ok"
+  },
+  "pred_sample": [
+   6882.738272567243,
+   8727.882203740106,
+   32127.129117391418
+  ],
+  "actual_sample": [
+   4335,
+   18069,
+   32859
+  ]
+ },
+ "final_model_two_processes_same_predictions": true,
+ "final_model_file_sha256_matches_metadata": true,
+ "final_model_reproducibility_checks": {
+  "supported_grid_rows": 30699,
+  "grid_all_finite_positive": true,
+  "grid_pred_min_max": [
+   2030.2860556810851,
+   71906.19724285985
+  ],
+  "test_block_rows": 89966,
+  "test_blocks_all_finite_positive": true,
+  "final_retrain_vs_candidate_artifacts": {
+   "rows": 89966,
+   "max_abs_diff_final_vs_candidate_members_inr": 0.0,
+   "bit_identical": true
+  }
+ },
+ "flight_code_in_inputs": false
+}

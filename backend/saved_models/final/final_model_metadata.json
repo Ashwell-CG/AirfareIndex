@@ -1,0 +1,254 @@
+{
+ "model_name": "blend_rf_lookup",
+ "file": "airfare_model.joblib",
+ "sha256": "12b0279375f3b4a8e93863697ed09fbe55b1597b00c3dbfe49ac6407a2bc2964",
+ "bytes": 26635898,
+ "predict_contract": {
+  "input_columns": [
+   "airline",
+   "travel_class",
+   "source",
+   "destination",
+   "stops",
+   "duration_hours",
+   "days_left",
+   "dep_minutes"
+  ],
+  "output": "fare in INR (float, positive)",
+  "target_transform": "log1p inside the model; predictions already back-transformed with expm1",
+  "flight_code_used_as_feature": false,
+  "validation": "ml.inference.validate against data/processed/supported_options.json"
+ },
+ "frozen_config": {
+  "blend": {
+   "members": [
+    "rf",
+    "lookup"
+   ],
+   "weights": [
+    0.75,
+    0.25
+   ],
+   "val_mae": [
+    4271.605273786665,
+    4283.841414594448
+   ],
+   "mean": 4277.723344190556
+  },
+  "members": {
+   "rf": {
+    "kind": "rf",
+    "params": {
+     "min_samples_leaf": 20,
+     "max_samples": 0.5,
+     "max_features": 0.2,
+     "max_depth": 32,
+     "n_estimators": 150
+    },
+    "variant": "no_dep_minutes",
+    "weight_power": 1.0,
+    "dev_val_mae": [
+     4319.240732176226,
+     4349.3814203933
+    ],
+    "dev_val_mae_mean": 4334.311076284763
+   },
+   "lookup": {
+    "kind": "lookup",
+    "params": {},
+    "variant": "base",
+    "weight_power": 0.0,
+    "dev_val_mae": [
+     4491.568372126029,
+     4445.612847472275
+    ],
+    "dev_val_mae_mean": 4468.590609799152
+   }
+  }
+ },
+ "training": {
+  "recipe": "TV",
+  "rows": 355256,
+  "roles": [
+   "train",
+   "val"
+  ],
+  "journey_dates": [
+   "2023-01-16",
+   "2023-03-06"
+  ],
+  "days_left_range": [
+   1,
+   50
+  ],
+  "classes": [
+   "Business",
+   "Economy",
+   "Premium Economy"
+  ],
+  "excluded": [
+   "First class",
+   "test date blocks",
+   "Dataset A"
+  ],
+  "fit_seconds": 5.758992433547974
+ },
+ "selection": {
+  "recipe": "TV",
+  "eligible": [
+   "blend_rf_lookup",
+   "blend_rf_ridge",
+   "blend_rf_xgb",
+   "blend_xgb_lookup",
+   "rf_tuned",
+   "ridge",
+   "xgb_tuned"
+  ],
+  "best_by_unseen_mae": "blend_rf_lookup",
+  "tie_analysis": {
+   "blend_rf_lookup": {
+    "mean_diff_vs_best": 0.0,
+    "se": 0.0,
+    "tie_threshold": 31.537274704312996,
+    "tied": true
+   },
+   "blend_rf_ridge": {
+    "mean_diff_vs_best": 74.1664933619304,
+    "se": 12.084564515555286,
+    "tie_threshold": 31.537274704312996,
+    "tied": false
+   },
+   "blend_rf_xgb": {
+    "mean_diff_vs_best": 67.53810646013653,
+    "se": 15.121853012789817,
+    "tie_threshold": 31.537274704312996,
+    "tied": false
+   },
+   "blend_xgb_lookup": {
+    "mean_diff_vs_best": 73.0720059320176,
+    "se": 14.886942129941408,
+    "tie_threshold": 31.537274704312996,
+    "tied": false
+   },
+   "rf_tuned": {
+    "mean_diff_vs_best": 27.33225416599671,
+    "se": 4.900541277955716,
+    "tie_threshold": 31.537274704312996,
+    "tied": true
+   },
+   "ridge": {
+    "mean_diff_vs_best": 689.3653331379593,
+    "se": 43.958725678471716,
+    "tie_threshold": 87.91745135694343,
+    "tied": false
+   },
+   "xgb_tuned": {
+    "mean_diff_vs_best": 255.169580788947,
+    "se": 26.469222149765812,
+    "tie_threshold": 52.938444299531625,
+    "tied": false
+   }
+  },
+  "tied_set": [
+   "blend_rf_lookup",
+   "rf_tuned"
+  ],
+  "scores_on_tied_set": {
+   "blend_rf_lookup": {
+    "stability": 1.0,
+    "mae_mdape": 1.0,
+    "external": 1.0,
+    "latency_p95": 2.0,
+    "size": 2.0,
+    "explainability": 2.0,
+    "weighted_rank_sum": 27.0
+   },
+   "rf_tuned": {
+    "stability": 2.0,
+    "mae_mdape": 2.0,
+    "external": 2.0,
+    "latency_p95": 1.0,
+    "size": 1.0,
+    "explainability": 1.0,
+    "weighted_rank_sum": 36.0
+   }
+  },
+  "chosen": "blend_rf_lookup",
+  "reference_route_lookup_unseen": {
+   "mae_mean": 3224.951345438397,
+   "mdape_mean": 11.687458482511863
+  },
+  "unseen_mean_mae": {
+   "blend_rf_lookup": 3153.7274704312995,
+   "blend_rf_ridge": 3227.893963793231,
+   "blend_rf_xgb": 3221.2655768914365,
+   "blend_xgb_lookup": 3226.799476363318,
+   "rf_phase5cfg": 3635.994070612471,
+   "rf_tuned": 3181.0597245972967,
+   "ridge": 3843.0928035692586,
+   "route_lookup": 3224.951345438397,
+   "xgb_phase5cfg": 3670.077393590042,
+   "xgb_tuned": 3408.897051220247
+  }
+ },
+ "evaluation_summary": {
+  "unseen_flight_multiseed_mae_mean_std": [
+   3153.7274704312995,
+   184.8397840872855
+  ],
+  "unseen_flight_multiseed_mdape_mean_pct": 11.39187440053281,
+  "seen_flight_date_block_benchmark": {
+   "n": 89966,
+   "mae": 2848.922894083221,
+   "mse": 26179825.267465506,
+   "rmse": 5116.622447226833,
+   "r2": 0.9331304494933433,
+   "mape_pct": 15.459305186927756,
+   "mdape_pct": 9.919740256702948,
+   "bias_inr": 36.58689209685181,
+   "non_positive_predictions": 0
+  },
+  "dataset_a_shift_check": {
+   "n": 299137,
+   "mae": 4477.806706303432,
+   "mse": 34640063.10768431,
+   "rmse": 5885.580949038447,
+   "r2": 0.9328894126846199,
+   "mape_pct": 57.74143021628845,
+   "mdape_pct": 35.25325029217746,
+   "bias_inr": 1897.228540509848,
+   "non_positive_predictions": 0
+  }
+ },
+ "reproducibility_checks": {
+  "supported_grid_rows": 30699,
+  "grid_all_finite_positive": true,
+  "grid_pred_min_max": [
+   2030.2860556810851,
+   71906.19724285985
+  ],
+  "test_block_rows": 89966,
+  "test_blocks_all_finite_positive": true,
+  "final_retrain_vs_candidate_artifacts": {
+   "rows": 89966,
+   "max_abs_diff_final_vs_candidate_members_inr": 0.0,
+   "bit_identical": true
+  }
+ },
+ "environment": {
+  "python": "3.14.2",
+  "scikit_learn": "1.9.1",
+  "xgboost": "3.4.1",
+  "numpy": "2.5.5",
+  "pandas": "3.1.1"
+ },
+ "limitations": [
+  "Trained on one platform (EaseMyTrip) for Jan-Mar 2023 journeys; lead time and calendar effects are confounded.",
+  "days_left must be 1-50; fares are listed fares, not transacted.",
+  "Accuracy on flights unseen in training is much lower than on flights seen on other dates (see multi-seed results).",
+  "Dataset A (2022) shows a price-level shift; the model is not recalibrated for other periods."
+ ],
+ "hashes": {
+  "frozen_candidates_sha256": "8ce0e37aac6249eae7b94efe6285aaa3965cff02675baaa9409f1c5e7f63aa87"
+ }
+}

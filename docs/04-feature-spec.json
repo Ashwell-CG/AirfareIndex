@@ -1,0 +1,417 @@
+{
+ "target": "fare",
+ "raw_inputs": [
+  "airline",
+  "travel_class",
+  "source",
+  "destination",
+  "stops",
+  "duration_hours",
+  "days_left",
+  "dep_minutes"
+ ],
+ "excluded": {
+  "fare": "target",
+  "row_id": "row identifier",
+  "flight_code": "identifier of a recurring flight (1,405 levels, determines airline): memorisation risk (Decision)",
+  "journey_date": "days_left is a one-to-one function of it (single booking date); keeping both lets a model memorise dates",
+  "weekday": "function of journey_date; Economy variance share 0.003 (Phase 3)",
+  "arr_minutes": "exactly (dep_minutes + duration) mod 24h in 100% of rows: redundant",
+  "dep_bucket": "exact function of dep_minutes",
+  "arr_bucket": "exact function of arr_minutes",
+  "block": "split bookkeeping"
+ },
+ "features": [
+  {
+   "name": "airline",
+   "type": "categorical (9)",
+   "pipelines": "tree, linear",
+   "derivation": "raw",
+   "rationale": "eta^2 0.274 pooled / 0.235 Economy"
+  },
+  {
+   "name": "travel_class",
+   "type": "categorical (3: Economy, Premium Economy, Business)",
+   "pipelines": "tree, linear",
+   "derivation": "raw",
+   "rationale": "eta^2 0.755: dominant driver; First excluded (n=144)"
+  },
+  {
+   "name": "source",
+   "type": "categorical (7)",
+   "pipelines": "tree, linear",
+   "derivation": "raw",
+   "rationale": "route/market effect"
+  },
+  {
+   "name": "destination",
+   "type": "categorical (7)",
+   "pipelines": "tree, linear",
+   "derivation": "raw",
+   "rationale": "route/market effect"
+  },
+  {
+   "name": "stops",
+   "type": "ordinal (non-stop<1-stop<2+-stop)",
+   "pipelines": "tree: ordinal 0/1/2; linear: one-hot",
+   "derivation": "raw",
+   "rationale": "Economy medians 5,737 / 10,075 / 12,925 are not evenly spaced, so the linear model uses one-hot"
+  },
+  {
+   "name": "duration_hours",
+   "type": "numeric",
+   "pipelines": "tree, linear",
+   "derivation": "raw",
+   "rationale": "r=0.33 with fare in Economy"
+  },
+  {
+   "name": "days_left",
+   "type": "numeric 1-50",
+   "pipelines": "tree, linear",
+   "derivation": "raw",
+   "rationale": "the only lead-time signal; equals journey date minus 2023-01-15 in training"
+  },
+  {
+   "name": "dep_minutes",
+   "type": "numeric 0-1439",
+   "pipelines": "tree, linear",
+   "derivation": "raw (exact clock time)",
+   "rationale": "replaces the 4 coarse buckets; weak signal (|r|<0.05)"
+  },
+  {
+   "name": "route_ref_duration_hours",
+   "type": "numeric",
+   "pipelines": "tree, linear",
+   "derivation": "median non-stop duration of the route, fitted on training rows",
+   "rationale": "distance proxy that generalises beyond the source/destination pair"
+  },
+  {
+   "name": "duration_ratio",
+   "type": "numeric",
+   "pipelines": "tree, linear",
+   "derivation": "duration_hours / route_ref_duration_hours",
+   "rationale": "measures detour/layover length relative to direct"
+  },
+  {
+   "name": "route",
+   "type": "categorical (42)",
+   "pipelines": "linear only",
+   "derivation": "source + '-' + destination",
+   "rationale": "lets a linear model fit route effects (Economy eta^2 0.111)"
+  },
+  {
+   "name": "airline_class",
+   "type": "categorical (12 observed)",
+   "pipelines": "linear only",
+   "derivation": "airline + '|' + class",
+   "rationale": "class exists only for some airlines; linear model needs the interaction"
+  },
+  {
+   "name": "dep_sin, dep_cos",
+   "type": "numeric",
+   "pipelines": "linear only",
+   "derivation": "sin/cos of 2*pi*dep_minutes/1440",
+   "rationale": "time of day is circular; cos has |r| 0.105 vs 0.042 for raw minutes (Economy, log fare)"
+  },
+  {
+   "name": "log1p_days_left",
+   "type": "numeric",
+   "pipelines": "linear only",
+   "derivation": "log(1 + days_left)",
+   "rationale": "fare falls steeply then flattens: r -0.289 vs -0.274 (Economy, log fare)"
+  },
+  {
+   "name": "log_duration_ratio",
+   "type": "numeric",
+   "pipelines": "linear only",
+   "derivation": "log(duration_ratio)",
+   "rationale": "r 0.443 vs 0.390 for raw duration (Economy, log fare); weaker inside 1-stop only (0.092 vs 0.173)"
+  }
+ ],
+ "output_columns_tree": [
+  "airline_Air India",
+  "airline_AirAsia",
+  "airline_AkasaAir",
+  "airline_AllianceAir",
+  "airline_GO FIRST",
+  "airline_Indigo",
+  "airline_SpiceJet",
+  "airline_StarAir",
+  "airline_Vistara",
+  "travel_class_Business",
+  "travel_class_Economy",
+  "travel_class_Premium Economy",
+  "source_Ahmedabad",
+  "source_Bangalore",
+  "source_Chennai",
+  "source_Delhi",
+  "source_Hyderabad",
+  "source_Kolkata",
+  "source_Mumbai",
+  "destination_Ahmedabad",
+  "destination_Bangalore",
+  "destination_Chennai",
+  "destination_Delhi",
+  "destination_Hyderabad",
+  "destination_Kolkata",
+  "destination_Mumbai",
+  "stops",
+  "duration_hours",
+  "days_left",
+  "dep_minutes",
+  "route_ref_duration_hours",
+  "duration_ratio"
+ ],
+ "route_ref_fit_on_primary_train": {
+  "Ahmedabad-Bangalore": 2.25,
+  "Ahmedabad-Chennai": 2.417,
+  "Ahmedabad-Delhi": 1.583,
+  "Ahmedabad-Hyderabad": 1.833,
+  "Ahmedabad-Kolkata": 2.417,
+  "Ahmedabad-Mumbai": 1.333,
+  "Bangalore-Ahmedabad": 2.333,
+  "Bangalore-Chennai": 1.083,
+  "Bangalore-Delhi": 2.833,
+  "Bangalore-Hyderabad": 1.25,
+  "Bangalore-Kolkata": 2.5,
+  "Bangalore-Mumbai": 1.75,
+  "Chennai-Ahmedabad": 2.417,
+  "Chennai-Bangalore": 1.0,
+  "Chennai-Delhi": 2.917,
+  "Chennai-Hyderabad": 1.25,
+  "Chennai-Kolkata": 2.333,
+  "Chennai-Mumbai": 2.0,
+  "Delhi-Ahmedabad": 1.583,
+  "Delhi-Bangalore": 2.833,
+  "Delhi-Chennai": 2.833,
+  "Delhi-Hyderabad": 2.25,
+  "Delhi-Kolkata": 2.167,
+  "Delhi-Mumbai": 2.25,
+  "Hyderabad-Ahmedabad": 1.75,
+  "Hyderabad-Bangalore": 1.333,
+  "Hyderabad-Chennai": 1.417,
+  "Hyderabad-Delhi": 2.333,
+  "Hyderabad-Kolkata": 2.083,
+  "Hyderabad-Mumbai": 1.583,
+  "Kolkata-Ahmedabad": 2.917,
+  "Kolkata-Bangalore": 2.667,
+  "Kolkata-Chennai": 2.458,
+  "Kolkata-Delhi": 2.5,
+  "Kolkata-Hyderabad": 2.25,
+  "Kolkata-Mumbai": 3.0,
+  "Mumbai-Ahmedabad": 1.25,
+  "Mumbai-Bangalore": 1.75,
+  "Mumbai-Chennai": 2.0,
+  "Mumbai-Delhi": 2.25,
+  "Mumbai-Hyderabad": 1.5,
+  "Mumbai-Kolkata": 2.667
+ },
+ "output_columns_linear": [
+  "airline_Air India",
+  "airline_AirAsia",
+  "airline_AkasaAir",
+  "airline_AllianceAir",
+  "airline_GO FIRST",
+  "airline_Indigo",
+  "airline_SpiceJet",
+  "airline_StarAir",
+  "airline_Vistara",
+  "travel_class_Business",
+  "travel_class_Economy",
+  "travel_class_Premium Economy",
+  "source_Ahmedabad",
+  "source_Bangalore",
+  "source_Chennai",
+  "source_Delhi",
+  "source_Hyderabad",
+  "source_Kolkata",
+  "source_Mumbai",
+  "destination_Ahmedabad",
+  "destination_Bangalore",
+  "destination_Chennai",
+  "destination_Delhi",
+  "destination_Hyderabad",
+  "destination_Kolkata",
+  "destination_Mumbai",
+  "stops_1-stop",
+  "stops_2+-stop",
+  "stops_non-stop",
+  "route_Ahmedabad-Bangalore",
+  "route_Ahmedabad-Chennai",
+  "route_Ahmedabad-Delhi",
+  "route_Ahmedabad-Hyderabad",
+  "route_Ahmedabad-Kolkata",
+  "route_Ahmedabad-Mumbai",
+  "route_Bangalore-Ahmedabad",
+  "route_Bangalore-Chennai",
+  "route_Bangalore-Delhi",
+  "route_Bangalore-Hyderabad",
+  "route_Bangalore-Kolkata",
+  "route_Bangalore-Mumbai",
+  "route_Chennai-Ahmedabad",
+  "route_Chennai-Bangalore",
+  "route_Chennai-Delhi",
+  "route_Chennai-Hyderabad",
+  "route_Chennai-Kolkata",
+  "route_Chennai-Mumbai",
+  "route_Delhi-Ahmedabad",
+  "route_Delhi-Bangalore",
+  "route_Delhi-Chennai",
+  "route_Delhi-Hyderabad",
+  "route_Delhi-Kolkata",
+  "route_Delhi-Mumbai",
+  "route_Hyderabad-Ahmedabad",
+  "route_Hyderabad-Bangalore",
+  "route_Hyderabad-Chennai",
+  "route_Hyderabad-Delhi",
+  "route_Hyderabad-Kolkata",
+  "route_Hyderabad-Mumbai",
+  "route_Kolkata-Ahmedabad",
+  "route_Kolkata-Bangalore",
+  "route_Kolkata-Chennai",
+  "route_Kolkata-Delhi",
+  "route_Kolkata-Hyderabad",
+  "route_Kolkata-Mumbai",
+  "route_Mumbai-Ahmedabad",
+  "route_Mumbai-Bangalore",
+  "route_Mumbai-Chennai",
+  "route_Mumbai-Delhi",
+  "route_Mumbai-Hyderabad",
+  "route_Mumbai-Kolkata",
+  "airline_class_Air India|Business",
+  "airline_class_Air India|Economy",
+  "airline_class_AirAsia|Economy",
+  "airline_class_AkasaAir|Economy",
+  "airline_class_AllianceAir|Economy",
+  "airline_class_GO FIRST|Economy",
+  "airline_class_Indigo|Economy",
+  "airline_class_SpiceJet|Economy",
+  "airline_class_StarAir|Economy",
+  "airline_class_Vistara|Business",
+  "airline_class_Vistara|Economy",
+  "airline_class_Vistara|Premium Economy",
+  "duration_hours",
+  "days_left",
+  "log1p_days_left",
+  "dep_sin",
+  "dep_cos",
+  "route_ref_duration_hours",
+  "duration_ratio",
+  "log_duration_ratio"
+ ],
+ "route_ref_routes_differing_train_vs_all_rows": 25,
+ "transform_checks": {
+  "tree": {
+   "split_primary:train": {
+    "rows": 265235,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_primary:val": {
+    "rows": 90021,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_primary:test": {
+    "rows": 89966,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_group:train": {
+    "rows": 211532,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_group:val": {
+    "rows": 71862,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_group:test": {
+    "rows": 18235,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_stress:train": {
+    "rows": 311968,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_stress:val": {
+    "rows": 44481,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_stress:test": {
+    "rows": 88773,
+    "n_features": 32,
+    "nan": 0,
+    "inf": 0
+   }
+  },
+  "linear": {
+   "split_primary:train": {
+    "rows": 265235,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_primary:val": {
+    "rows": 90021,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_primary:test": {
+    "rows": 89966,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_group:train": {
+    "rows": 211532,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_group:val": {
+    "rows": 71862,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_group:test": {
+    "rows": 18235,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_stress:train": {
+    "rows": 311968,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_stress:val": {
+    "rows": 44481,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   },
+   "split_stress:test": {
+    "rows": 88773,
+    "n_features": 91,
+    "nan": 0,
+    "inf": 0
+   }
+  }
+ }
+}

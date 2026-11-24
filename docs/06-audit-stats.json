@@ -1,0 +1,872 @@
+{
+ "boundary_audit": {
+  "ridge": {
+   "primary": {
+    "alpha": {
+     "selected": 10.0,
+     "position_in_grid": "interior",
+     "grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+     ]
+    }
+   },
+   "group": {
+    "alpha": {
+     "selected": 1.0,
+     "position_in_grid": "interior",
+     "grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+     ]
+    }
+   },
+   "stress": {
+    "alpha": {
+     "selected": 0.01,
+     "position_in_grid": "min",
+     "grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+     ]
+    }
+   }
+  },
+  "random_forest": {
+   "primary": {
+    "min_samples_leaf": {
+     "selected": 5,
+     "position_in_grid": "min",
+     "grid": [
+      5,
+      10,
+      20
+     ]
+    },
+    "max_features": {
+     "selected": 0.7,
+     "position_in_grid": "interior",
+     "grid": [
+      0.4,
+      0.7,
+      1.0
+     ]
+    },
+    "max_depth": {
+     "selected": null,
+     "position_in_grid": "max",
+     "grid": [
+      16,
+      24,
+      null
+     ]
+    }
+   },
+   "group": {
+    "min_samples_leaf": {
+     "selected": 5,
+     "position_in_grid": "min",
+     "grid": [
+      5,
+      10,
+      20
+     ]
+    },
+    "max_features": {
+     "selected": 0.7,
+     "position_in_grid": "interior",
+     "grid": [
+      0.4,
+      0.7,
+      1.0
+     ]
+    },
+    "max_depth": {
+     "selected": null,
+     "position_in_grid": "max",
+     "grid": [
+      16,
+      24,
+      null
+     ]
+    }
+   },
+   "stress": {
+    "min_samples_leaf": {
+     "selected": 5,
+     "position_in_grid": "min",
+     "grid": [
+      5,
+      10,
+      20
+     ]
+    },
+    "max_features": {
+     "selected": 0.7,
+     "position_in_grid": "interior",
+     "grid": [
+      0.4,
+      0.7,
+      1.0
+     ]
+    },
+    "max_depth": {
+     "selected": null,
+     "position_in_grid": "max",
+     "grid": [
+      16,
+      24,
+      null
+     ]
+    }
+   }
+  },
+  "xgboost": {
+   "primary": {
+    "subsample": {
+     "selected": 0.9,
+     "position_in_grid": "interior",
+     "grid": [
+      0.7,
+      0.9,
+      1.0
+     ]
+    },
+    "n_estimators": {
+     "selected": 600,
+     "position_in_grid": "interior",
+     "grid": [
+      300,
+      600,
+      1000
+     ]
+    },
+    "min_child_weight": {
+     "selected": 20,
+     "position_in_grid": "max",
+     "grid": [
+      1,
+      5,
+      20
+     ]
+    },
+    "max_depth": {
+     "selected": 10,
+     "position_in_grid": "max",
+     "grid": [
+      4,
+      6,
+      8,
+      10
+     ]
+    },
+    "learning_rate": {
+     "selected": 0.06,
+     "position_in_grid": "interior",
+     "grid": [
+      0.03,
+      0.06,
+      0.1
+     ]
+    },
+    "colsample_bytree": {
+     "selected": 0.8,
+     "position_in_grid": "interior",
+     "grid": [
+      0.6,
+      0.8,
+      1.0
+     ]
+    }
+   },
+   "group": {
+    "subsample": {
+     "selected": 0.9,
+     "position_in_grid": "interior",
+     "grid": [
+      0.7,
+      0.9,
+      1.0
+     ]
+    },
+    "n_estimators": {
+     "selected": 600,
+     "position_in_grid": "interior",
+     "grid": [
+      300,
+      600,
+      1000
+     ]
+    },
+    "min_child_weight": {
+     "selected": 20,
+     "position_in_grid": "max",
+     "grid": [
+      1,
+      5,
+      20
+     ]
+    },
+    "max_depth": {
+     "selected": 10,
+     "position_in_grid": "max",
+     "grid": [
+      4,
+      6,
+      8,
+      10
+     ]
+    },
+    "learning_rate": {
+     "selected": 0.06,
+     "position_in_grid": "interior",
+     "grid": [
+      0.03,
+      0.06,
+      0.1
+     ]
+    },
+    "colsample_bytree": {
+     "selected": 0.8,
+     "position_in_grid": "interior",
+     "grid": [
+      0.6,
+      0.8,
+      1.0
+     ]
+    }
+   },
+   "stress": {
+    "subsample": {
+     "selected": 0.9,
+     "position_in_grid": "interior",
+     "grid": [
+      0.7,
+      0.9,
+      1.0
+     ]
+    },
+    "n_estimators": {
+     "selected": 600,
+     "position_in_grid": "interior",
+     "grid": [
+      300,
+      600,
+      1000
+     ]
+    },
+    "min_child_weight": {
+     "selected": 20,
+     "position_in_grid": "max",
+     "grid": [
+      1,
+      5,
+      20
+     ]
+    },
+    "max_depth": {
+     "selected": 10,
+     "position_in_grid": "max",
+     "grid": [
+      4,
+      6,
+      8,
+      10
+     ]
+    },
+    "learning_rate": {
+     "selected": 0.06,
+     "position_in_grid": "interior",
+     "grid": [
+      0.03,
+      0.06,
+      0.1
+     ]
+    },
+    "colsample_bytree": {
+     "selected": 0.8,
+     "position_in_grid": "interior",
+     "grid": [
+      0.6,
+      0.8,
+      1.0
+     ]
+    }
+   }
+  },
+  "gradient_boosting": {
+   "primary": {
+    "subsample": {
+     "selected": 1.0,
+     "position_in_grid": "max",
+     "grid": [
+      0.7,
+      1.0
+     ]
+    },
+    "n_estimators": {
+     "selected": 300,
+     "position_in_grid": "max",
+     "grid": [
+      150,
+      300
+     ]
+    },
+    "min_samples_leaf": {
+     "selected": 10,
+     "position_in_grid": "min",
+     "grid": [
+      10,
+      30
+     ]
+    },
+    "max_depth": {
+     "selected": 6,
+     "position_in_grid": "max",
+     "grid": [
+      4,
+      5,
+      6
+     ]
+    },
+    "learning_rate": {
+     "selected": 0.1,
+     "position_in_grid": "max",
+     "grid": [
+      0.05,
+      0.1
+     ]
+    }
+   },
+   "group": {
+    "subsample": {
+     "selected": 1.0,
+     "position_in_grid": "max",
+     "grid": [
+      0.7,
+      1.0
+     ]
+    },
+    "n_estimators": {
+     "selected": 300,
+     "position_in_grid": "max",
+     "grid": [
+      150,
+      300
+     ]
+    },
+    "min_samples_leaf": {
+     "selected": 10,
+     "position_in_grid": "min",
+     "grid": [
+      10,
+      30
+     ]
+    },
+    "max_depth": {
+     "selected": 6,
+     "position_in_grid": "max",
+     "grid": [
+      4,
+      5,
+      6
+     ]
+    },
+    "learning_rate": {
+     "selected": 0.1,
+     "position_in_grid": "max",
+     "grid": [
+      0.05,
+      0.1
+     ]
+    }
+   },
+   "stress": {
+    "subsample": {
+     "selected": 1.0,
+     "position_in_grid": "max",
+     "grid": [
+      0.7,
+      1.0
+     ]
+    },
+    "n_estimators": {
+     "selected": 300,
+     "position_in_grid": "max",
+     "grid": [
+      150,
+      300
+     ]
+    },
+    "min_samples_leaf": {
+     "selected": 10,
+     "position_in_grid": "min",
+     "grid": [
+      10,
+      30
+     ]
+    },
+    "max_depth": {
+     "selected": 6,
+     "position_in_grid": "max",
+     "grid": [
+      4,
+      5,
+      6
+     ]
+    },
+    "learning_rate": {
+     "selected": 0.1,
+     "position_in_grid": "max",
+     "grid": [
+      0.05,
+      0.1
+     ]
+    }
+   }
+  },
+  "decision_tree": {
+   "primary": {
+    "min_samples_leaf": {
+     "selected": 3,
+     "position_in_grid": "interior",
+     "grid": [
+      1,
+      3,
+      10,
+      30
+     ]
+    },
+    "max_depth": {
+     "selected": null,
+     "position_in_grid": "max",
+     "grid": [
+      8,
+      12,
+      16,
+      20,
+      28,
+      null
+     ]
+    }
+   },
+   "group": {
+    "min_samples_leaf": {
+     "selected": 3,
+     "position_in_grid": "interior",
+     "grid": [
+      1,
+      3,
+      10,
+      30
+     ]
+    },
+    "max_depth": {
+     "selected": null,
+     "position_in_grid": "max",
+     "grid": [
+      8,
+      12,
+      16,
+      20,
+      28,
+      null
+     ]
+    }
+   },
+   "stress": {
+    "min_samples_leaf": {
+     "selected": 3,
+     "position_in_grid": "interior",
+     "grid": [
+      1,
+      3,
+      10,
+      30
+     ]
+    },
+    "max_depth": {
+     "selected": null,
+     "position_in_grid": "max",
+     "grid": [
+      8,
+      12,
+      16,
+      20,
+      28,
+      null
+     ]
+    }
+   }
+  }
+ },
+ "search_marginals": {
+  "primary:random_forest": {
+   "max_depth": {
+    "16.0": 3434,
+    "24.0": 3348
+   },
+   "min_samples_leaf": {
+    "10": 3291,
+    "20": 3490,
+    "5": 3237
+   },
+   "max_features": {
+    "0.4": 3355,
+    "0.7": 3222,
+    "1.0": 3418
+   },
+   "n_configs": 8,
+   "val_mae_best_worst": [
+    3155,
+    3509
+   ]
+  },
+  "primary:xgboost": {
+   "n_estimators": {
+    "1000": 3180,
+    "300": 3287,
+    "600": 3216
+   },
+   "learning_rate": {
+    "0.03": 3078,
+    "0.06": 3251,
+    "0.1": 3226
+   },
+   "max_depth": {
+    "10": 3054,
+    "4": 3507,
+    "6": 3208,
+    "8": 3070
+   },
+   "subsample": {
+    "0.7": 3277,
+    "0.9": 3117,
+    "1.0": 3350
+   },
+   "colsample_bytree": {
+    "0.6": 3070,
+    "0.8": 3185,
+    "1.0": 3343
+   },
+   "min_child_weight": {
+    "1": 3257,
+    "20": 3137,
+    "5": 3332
+   },
+   "n_configs": 12,
+   "val_mae_best_worst": [
+    3027,
+    3691
+   ]
+  },
+  "group:random_forest": {
+   "max_depth": {
+    "16.0": 3298,
+    "24.0": 3213
+   },
+   "min_samples_leaf": {
+    "10": 3149,
+    "20": 3368,
+    "5": 3091
+   },
+   "max_features": {
+    "0.4": 3219,
+    "0.7": 3086,
+    "1.0": 3282
+   },
+   "n_configs": 8,
+   "val_mae_best_worst": [
+    3015,
+    3400
+   ]
+  },
+  "group:xgboost": {
+   "n_estimators": {
+    "1000": 3103,
+    "300": 3216,
+    "600": 3142
+   },
+   "learning_rate": {
+    "0.03": 2994,
+    "0.06": 3175,
+    "0.1": 3153
+   },
+   "max_depth": {
+    "10": 2988,
+    "4": 3423,
+    "6": 3116,
+    "8": 3002
+   },
+   "subsample": {
+    "0.7": 3184,
+    "0.9": 3048,
+    "1.0": 3278
+   },
+   "colsample_bytree": {
+    "0.6": 3002,
+    "0.8": 3114,
+    "1.0": 3261
+   },
+   "min_child_weight": {
+    "1": 3178,
+    "20": 3063,
+    "5": 3258
+   },
+   "n_configs": 12,
+   "val_mae_best_worst": [
+    2963,
+    3621
+   ]
+  },
+  "stress:random_forest": {
+   "max_depth": {
+    "16.0": 2398,
+    "24.0": 2301
+   },
+   "min_samples_leaf": {
+    "10": 2215,
+    "20": 2441,
+    "5": 2213
+   },
+   "max_features": {
+    "0.4": 2356,
+    "0.7": 2160,
+    "1.0": 2335
+   },
+   "n_configs": 8,
+   "val_mae_best_worst": [
+    2092,
+    2519
+   ]
+  },
+  "stress:xgboost": {
+   "n_estimators": {
+    "1000": 2223,
+    "300": 2389,
+    "600": 2284
+   },
+   "learning_rate": {
+    "0.03": 2123,
+    "0.06": 2335,
+    "0.1": 2288
+   },
+   "max_depth": {
+    "10": 2134,
+    "4": 2578,
+    "6": 2233,
+    "8": 2132
+   },
+   "subsample": {
+    "0.7": 2333,
+    "0.9": 2183,
+    "1.0": 2429
+   },
+   "colsample_bytree": {
+    "0.6": 2132,
+    "0.8": 2241,
+    "1.0": 2423
+   },
+   "min_child_weight": {
+    "1": 2316,
+    "20": 2199,
+    "5": 2412
+   },
+   "n_configs": 12,
+   "val_mae_best_worst": [
+    2106,
+    2858
+   ]
+  }
+ },
+ "group_validation_overlap_with_group_train": {
+  "flight_code": {
+   "rows_with_key_in_train": 71847,
+   "share": 0.9998,
+   "distinct_keys_in_target": 1101,
+   "distinct_keys_unseen_in_train": 11
+  },
+  "airline+route+class": {
+   "rows_with_key_in_train": 71861,
+   "share": 1.0,
+   "distinct_keys_in_target": 373,
+   "distinct_keys_unseen_in_train": 1
+  },
+  "airline+flight+route+class": {
+   "rows_with_key_in_train": 71744,
+   "share": 0.9984,
+   "distinct_keys_in_target": 4477,
+   "distinct_keys_unseen_in_train": 64
+  },
+  "itinerary (series + dep time + duration + stops)": {
+   "rows_with_key_in_train": 71220,
+   "share": 0.9911,
+   "distinct_keys_in_target": 12271,
+   "distinct_keys_unseen_in_train": 515
+  }
+ },
+ "group_rf_log1p_val_vs_test_mae": {
+  "val": 2803.0506828703165,
+  "test": 3579.414998723075
+ },
+ "unseen_flight_diagnosis_phase5_group_test_RF_log1p": {
+  "rows": 18235,
+  "mae": 3579.415003636336,
+  "mdape_pct": 12.368002484362389,
+  "held_out_codes_in_test": 264,
+  "share_of_total_abs_error_from_worst_10pct_codes": 0.7747994448982319,
+  "share_of_rows_in_worst_10pct_codes": 0.5786673978612559,
+  "per_code_median_of_mdape_pct": 11.929031217770087,
+  "by_training_siblings_of_airline_route_class": {
+   "(-1, 50]": {
+    "rows": 138,
+    "mae": 995.6420703832654,
+    "mdape_pct": 6.629093131082772
+   },
+   "(50, 200]": {
+    "rows": 711,
+    "mae": 2565.4963835596873,
+    "mdape_pct": 13.03045975326713
+   },
+   "(200, 500]": {
+    "rows": 2377,
+    "mae": 4674.203115858849,
+    "mdape_pct": 16.022078321856473
+   },
+   "(500, 1000]": {
+    "rows": 10305,
+    "mae": 3415.0185496885993,
+    "mdape_pct": 12.263648087383233
+   },
+   "(1000, 1000000]": {
+    "rows": 4704,
+    "mae": 3615.395215975184,
+    "mdape_pct": 10.930354324630065
+   }
+  },
+  "by_stops_class": {
+   "1-stop|Business": {
+    "rows": 4854,
+    "mae": 7960.259974457277,
+    "mape_pct": 16.800322688760218
+   },
+   "1-stop|Economy": {
+    "rows": 7614,
+    "mae": 2036.1826496369763,
+    "mape_pct": 23.78907110085664
+   },
+   "1-stop|Premium Economy": {
+    "rows": 2599,
+    "mae": 2441.7221414786936,
+    "mape_pct": 19.87021030297606
+   },
+   "2+-stop|Business": {
+    "rows": 36,
+    "mae": 15589.431206597223,
+    "mape_pct": 23.607792620874147
+   },
+   "2+-stop|Economy": {
+    "rows": 669,
+    "mae": 2165.6533860005607,
+    "mape_pct": 18.237552049684698
+   },
+   "2+-stop|Premium Economy": {
+    "rows": 217,
+    "mae": 3592.851013464862,
+    "mape_pct": 21.96462576834993
+   },
+   "non-stop|Business": {
+    "rows": 419,
+    "mae": 2722.900416262679,
+    "mape_pct": 10.569685763177135
+   },
+   "non-stop|Economy": {
+    "rows": 1588,
+    "mae": 399.6796260036209,
+    "mape_pct": 8.574706478325634
+   },
+   "non-stop|Premium Economy": {
+    "rows": 239,
+    "mae": 906.7920759512291,
+    "mape_pct": 11.129616476993798
+   }
+  },
+  "lookup_airline_route_class_stops": {
+   "mae": 3289.9599670962434,
+   "mdape_pct": 12.22917233251745
+  },
+  "lookup_airline_class_stops": {
+   "mae": 4472.492295037016,
+   "mdape_pct": 19.540391935711266
+  }
+ },
+ "dataset_A": {
+  "raw_rows": 300261,
+  "excluded_malformed_duration_rows": 4,
+  "exact_duplicates_estimate": 35,
+  "date_range": [
+   "2022-02-11",
+   "2022-03-31"
+  ],
+  "days_left_range": [
+   1,
+   49
+  ],
+  "airlines_not_in_E": {
+   "Trujet": 41
+  },
+  "rows_with_supported_airline_class_route": 299172,
+  "rows_unsupported": 1085,
+  "classes": {
+   "Economy": 206770,
+   "Business": 93487
+  },
+  "cities": [
+   "Bangalore",
+   "Chennai",
+   "Delhi",
+   "Hyderabad",
+   "Kolkata",
+   "Mumbai"
+  ],
+  "share_rows_flight_code_also_in_E": 0.8054366759143001,
+  "share_rows_exact_itinerary_also_in_E": 0.14346709652064732,
+  "median_fare_A_by_class": {
+   "Business": 53164.0,
+   "Economy": 5772.0
+  },
+  "median_fare_E_by_class": {
+   "Business": 50409.0,
+   "Economy": 9494.0
+  },
+  "matched_itinerary_and_days_left_pairs": 32307,
+  "fare_ratio_A_over_E_on_matched_pairs": {
+   "0.1": 0.45232525723207845,
+   "0.25": 0.5798022598870056,
+   "0.5": 0.8278880080648857,
+   "0.75": 1.0,
+   "0.9": 1.1993358819340196
+  },
+  "duration_range_A": [
+   0.8333333333333334,
+   49.833333333333336
+  ],
+  "stops_A": {
+   "1-stop": 250927,
+   "non-stop": 36044,
+   "2+-stop": 13286
+  }
+ }
+}

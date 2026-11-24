@@ -1,0 +1,128 @@
+{
+ "factors": [
+  {
+   "key": "travel_class",
+   "label": "Travel class",
+   "share_pct": 54.3
+  },
+  {
+   "key": "days_left",
+   "label": "Days before departure",
+   "share_pct": 11.1
+  },
+  {
+   "key": "airline",
+   "label": "Airline",
+   "share_pct": 10.5
+  },
+  {
+   "key": "duration_hours",
+   "label": "Flight duration",
+   "share_pct": 5.2
+  },
+  {
+   "key": "source",
+   "label": "Origin city",
+   "share_pct": 4.6
+  },
+  {
+   "key": "destination",
+   "label": "Destination city",
+   "share_pct": 4.2
+  },
+  {
+   "key": "duration_ratio",
+   "label": "Duration vs direct flight",
+   "share_pct": 4.0
+  },
+  {
+   "key": "stops",
+   "label": "Number of stops",
+   "share_pct": 3.8
+  },
+  {
+   "key": "route_ref_duration_hours",
+   "label": "Route length",
+   "share_pct": 2.2
+  },
+  {
+   "key": "dep_minutes",
+   "label": "Departure time",
+   "share_pct": 0.0
+  }
+ ],
+ "factor_note": "Share of the Random Forest component's total mean absolute SHAP contribution on 1,500 held-out rows. Departure time is not used by this model version.",
+ "evaluation": {
+  "unseen_flights": {
+   "draws": 10,
+   "mae_inr": 3154,
+   "mae_sd_inr": 185,
+   "median_ape_pct": 11.4,
+   "median_ape_sd_pct": 0.7,
+   "r2": 0.918,
+   "by_class_mae_inr": {
+    "Economy": 1563,
+    "Premium Economy": 2161,
+    "Business": 6759
+   }
+  },
+  "seen_flights": {
+   "mae_inr": 2849,
+   "median_ape_pct": 9.9,
+   "r2": 0.933
+  },
+  "other_period_2022": {
+   "median_ape_pct": 35.3,
+   "economy_median_pred_over_actual": 1.65
+  },
+  "comparison_unseen_mae_inr": [
+   {
+    "model": "blend_rf_lookup",
+    "mae_inr": 3154,
+    "median_ape_pct": 11.4
+   },
+   {
+    "model": "rf_tuned",
+    "mae_inr": 3181,
+    "median_ape_pct": 11.8
+   },
+   {
+    "model": "route_lookup",
+    "mae_inr": 3225,
+    "median_ape_pct": 11.7
+   },
+   {
+    "model": "xgb_tuned",
+    "mae_inr": 3409,
+    "median_ape_pct": 13.4
+   },
+   {
+    "model": "ridge",
+    "mae_inr": 3843,
+    "median_ape_pct": 16.6
+   }
+  ]
+ },
+ "directions": [
+  {
+   "factor": "Travel class",
+   "text": "Class is the strongest factor: in the training data Business fares are several times higher than Economy, with Premium Economy in between."
+  },
+  {
+   "factor": "Airline",
+   "text": "Airlines sit at different typical price levels (for example low-cost carriers lower, full-service carriers higher), partly because class availability differs by airline."
+  },
+  {
+   "factor": "Flight duration",
+   "text": "Very short itineraries are estimated lower; beyond a few hours the estimate changes little."
+  },
+  {
+   "factor": "Days before departure",
+   "text": "In the training data, bookings made further ahead tend to have lower listed fares, with most of the difference within the last 2 to 3 weeks."
+  },
+  {
+   "factor": "Number of stops",
+   "text": "Non-stop itineraries tend to be estimated lower than itineraries with stops."
+  }
+ ]
+}

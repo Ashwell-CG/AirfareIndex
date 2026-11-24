@@ -1,0 +1,596 @@
+{
+ "config": {
+  "block_len": 5,
+  "block_role": {
+   "0": "train",
+   "1": "train",
+   "2": "val",
+   "3": "train",
+   "4": "test",
+   "5": "train",
+   "6": "val",
+   "7": "train",
+   "8": "test",
+   "9": "train"
+  },
+  "seed": 42,
+  "held_out_code_fraction": 0.2,
+  "excluded_classes": [
+   "First"
+  ],
+  "stress_test_dates": 10,
+  "stress_val_dates": 5
+ },
+ "model_frame_rows": 445222,
+ "held_out_flight_codes": 280,
+ "integrity": {
+  "split_primary": {
+   "disjoint": true,
+   "no_first_class": true,
+   "val_days_left_inside_train_range": true,
+   "test_days_left_inside_train_range": true
+  },
+  "split_group": {
+   "disjoint": true,
+   "no_first_class": true,
+   "val_days_left_inside_train_range": true,
+   "test_days_left_inside_train_range": true
+  },
+  "split_stress": {
+   "disjoint": true,
+   "no_first_class": true,
+   "val_days_left_inside_train_range": false,
+   "test_days_left_inside_train_range": false
+  },
+  "blocks_are_5_consecutive_dates": true,
+  "block_date_sets_disjoint": true,
+  "group_split_zero_code_overlap": {
+   "test": true
+  },
+  "group_val_zero_code_overlap_with_held_out_test": true
+ },
+ "split_primary": {
+  "partitions": {
+   "train": {
+    "rows": 265235,
+    "journey_dates": [
+     "2023-01-16",
+     "2023-03-06"
+    ],
+    "n_dates": 30,
+    "days_left_range": [
+     1,
+     50
+    ],
+    "classes": {
+     "Economy": 147832,
+     "Business": 75048,
+     "Premium Economy": 42355
+    },
+    "airlines": {
+     "Vistara": 135162,
+     "Air India": 69990,
+     "Indigo": 39156,
+     "AirAsia": 9375,
+     "GO FIRST": 6494,
+     "SpiceJet": 3452,
+     "AkasaAir": 1340,
+     "AllianceAir": 229,
+     "StarAir": 37
+    },
+    "flight_codes": 1392
+   },
+   "val": {
+    "rows": 90021,
+    "journey_dates": [
+     "2023-01-26",
+     "2023-02-19"
+    ],
+    "n_dates": 10,
+    "days_left_range": [
+     11,
+     35
+    ],
+    "classes": {
+     "Economy": 50610,
+     "Business": 25344,
+     "Premium Economy": 14067
+    },
+    "airlines": {
+     "Vistara": 45309,
+     "Air India": 24252,
+     "Indigo": 13366,
+     "AirAsia": 3220,
+     "GO FIRST": 2088,
+     "SpiceJet": 1248,
+     "AkasaAir": 445,
+     "AllianceAir": 81,
+     "StarAir": 12
+    },
+    "flight_codes": 1376
+   },
+   "test": {
+    "rows": 89966,
+    "journey_dates": [
+     "2023-02-05",
+     "2023-03-01"
+    ],
+    "n_dates": 10,
+    "days_left_range": [
+     21,
+     45
+    ],
+    "classes": {
+     "Economy": 49881,
+     "Business": 26143,
+     "Premium Economy": 13942
+    },
+    "airlines": {
+     "Vistara": 45733,
+     "Air India": 24019,
+     "Indigo": 13137,
+     "AirAsia": 3169,
+     "GO FIRST": 2204,
+     "SpiceJet": 1163,
+     "AkasaAir": 445,
+     "AllianceAir": 83,
+     "StarAir": 13
+    },
+    "flight_codes": 1318
+   }
+  },
+  "overlap_val_vs_train": {
+   "flight_code": {
+    "rows_with_key_in_train": 90005,
+    "share": 0.9998,
+    "distinct_keys_in_target": 1376,
+    "distinct_keys_unseen_in_train": 12
+   },
+   "airline+route+class": {
+    "rows_with_key_in_train": 90020,
+    "share": 1.0,
+    "distinct_keys_in_target": 376,
+    "distinct_keys_unseen_in_train": 1
+   },
+   "airline+flight+route+class": {
+    "rows_with_key_in_train": 89866,
+    "share": 0.9983,
+    "distinct_keys_in_target": 5601,
+    "distinct_keys_unseen_in_train": 81
+   },
+   "itinerary (series + dep time + duration + stops)": {
+    "rows_with_key_in_train": 89211,
+    "share": 0.991,
+    "distinct_keys_in_target": 15218,
+    "distinct_keys_unseen_in_train": 642
+   }
+  },
+  "overlap_test_vs_train": {
+   "flight_code": {
+    "rows_with_key_in_train": 89965,
+    "share": 1.0,
+    "distinct_keys_in_target": 1318,
+    "distinct_keys_unseen_in_train": 1
+   },
+   "airline+route+class": {
+    "rows_with_key_in_train": 89966,
+    "share": 1.0,
+    "distinct_keys_in_target": 375,
+    "distinct_keys_unseen_in_train": 0
+   },
+   "airline+flight+route+class": {
+    "rows_with_key_in_train": 89951,
+    "share": 0.9998,
+    "distinct_keys_in_target": 5315,
+    "distinct_keys_unseen_in_train": 13
+   },
+   "itinerary (series + dep time + duration + stops)": {
+    "rows_with_key_in_train": 89714,
+    "share": 0.9972,
+    "distinct_keys_in_target": 13446,
+    "distinct_keys_unseen_in_train": 208
+   }
+  },
+  "twin_reference_validation_only": {
+   "val_rows": 90021,
+   "val_rows_with_itinerary_twin_in_train": 89211,
+   "share": 0.991,
+   "median_abs_relative_gap_to_twin_median": 0.08,
+   "p90_abs_relative_gap": 0.3437
+  }
+ },
+ "split_group": {
+  "partitions": {
+   "train": {
+    "rows": 211532,
+    "journey_dates": [
+     "2023-01-16",
+     "2023-03-06"
+    ],
+    "n_dates": 30,
+    "days_left_range": [
+     1,
+     50
+    ],
+    "classes": {
+     "Economy": 118350,
+     "Business": 59897,
+     "Premium Economy": 33285
+    },
+    "airlines": {
+     "Vistara": 106360,
+     "Air India": 56538,
+     "Indigo": 31745,
+     "AirAsia": 7607,
+     "GO FIRST": 5418,
+     "SpiceJet": 2571,
+     "AkasaAir": 1087,
+     "AllianceAir": 173,
+     "StarAir": 33
+    },
+    "flight_codes": 1113
+   },
+   "val": {
+    "rows": 71862,
+    "journey_dates": [
+     "2023-01-26",
+     "2023-02-19"
+    ],
+    "n_dates": 10,
+    "days_left_range": [
+     11,
+     35
+    ],
+    "classes": {
+     "Economy": 40548,
+     "Business": 20256,
+     "Premium Economy": 11058
+    },
+    "airlines": {
+     "Vistara": 35706,
+     "Air India": 19590,
+     "Indigo": 10833,
+     "AirAsia": 2613,
+     "GO FIRST": 1741,
+     "SpiceJet": 940,
+     "AkasaAir": 367,
+     "AllianceAir": 61,
+     "StarAir": 11
+    },
+    "flight_codes": 1101
+   },
+   "test": {
+    "rows": 18235,
+    "journey_dates": [
+     "2023-02-05",
+     "2023-03-01"
+    ],
+    "n_dates": 10,
+    "days_left_range": [
+     21,
+     45
+    ],
+    "classes": {
+     "Economy": 9871,
+     "Business": 5309,
+     "Premium Economy": 3055
+    },
+    "airlines": {
+     "Vistara": 9835,
+     "Air India": 4540,
+     "Indigo": 2513,
+     "AirAsia": 588,
+     "GO FIRST": 343,
+     "SpiceJet": 312,
+     "AkasaAir": 82,
+     "AllianceAir": 20,
+     "StarAir": 2
+    },
+    "flight_codes": 264
+   },
+   "dropped": {
+    "rows": 143593,
+    "journey_dates": [
+     "2023-01-16",
+     "2023-03-06"
+    ],
+    "n_dates": 50,
+    "days_left_range": [
+     1,
+     50
+    ],
+    "classes": {
+     "Economy": 79554,
+     "Business": 41073,
+     "Premium Economy": 22966
+    },
+    "airlines": {
+     "Vistara": 74303,
+     "Air India": 37593,
+     "Indigo": 20568,
+     "AirAsia": 4956,
+     "GO FIRST": 3284,
+     "SpiceJet": 2040,
+     "AkasaAir": 694,
+     "AllianceAir": 139,
+     "StarAir": 16
+    },
+    "flight_codes": 1334
+   }
+  },
+  "overlap_val_vs_train": {
+   "flight_code": {
+    "rows_with_key_in_train": 71847,
+    "share": 0.9998,
+    "distinct_keys_in_target": 1101,
+    "distinct_keys_unseen_in_train": 11
+   },
+   "airline+route+class": {
+    "rows_with_key_in_train": 71861,
+    "share": 1.0,
+    "distinct_keys_in_target": 373,
+    "distinct_keys_unseen_in_train": 1
+   },
+   "airline+flight+route+class": {
+    "rows_with_key_in_train": 71744,
+    "share": 0.9984,
+    "distinct_keys_in_target": 4477,
+    "distinct_keys_unseen_in_train": 64
+   },
+   "itinerary (series + dep time + duration + stops)": {
+    "rows_with_key_in_train": 71220,
+    "share": 0.9911,
+    "distinct_keys_in_target": 12271,
+    "distinct_keys_unseen_in_train": 515
+   }
+  },
+  "overlap_test_vs_train": {
+   "flight_code": {
+    "rows_with_key_in_train": 0,
+    "share": 0.0,
+    "distinct_keys_in_target": 264,
+    "distinct_keys_unseen_in_train": 264
+   },
+   "airline+route+class": {
+    "rows_with_key_in_train": 18213,
+    "share": 0.9988,
+    "distinct_keys_in_target": 280,
+    "distinct_keys_unseen_in_train": 3
+   },
+   "airline+flight+route+class": {
+    "rows_with_key_in_train": 0,
+    "share": 0.0,
+    "distinct_keys_in_target": 1071,
+    "distinct_keys_unseen_in_train": 1071
+   },
+   "itinerary (series + dep time + duration + stops)": {
+    "rows_with_key_in_train": 0,
+    "share": 0.0,
+    "distinct_keys_in_target": 2610,
+    "distinct_keys_unseen_in_train": 2610
+   }
+  }
+ },
+ "split_stress": {
+  "partitions": {
+   "train": {
+    "rows": 311968,
+    "journey_dates": [
+     "2023-01-16",
+     "2023-02-19"
+    ],
+    "n_dates": 35,
+    "days_left_range": [
+     1,
+     35
+    ],
+    "classes": {
+     "Economy": 174913,
+     "Business": 87297,
+     "Premium Economy": 49758
+    },
+    "airlines": {
+     "Vistara": 158583,
+     "Air India": 82720,
+     "Indigo": 46099,
+     "AirAsia": 11078,
+     "GO FIRST": 7469,
+     "SpiceJet": 4137,
+     "AkasaAir": 1557,
+     "AllianceAir": 281,
+     "StarAir": 44
+    },
+    "flight_codes": 1402
+   },
+   "val": {
+    "rows": 44481,
+    "journey_dates": [
+     "2023-02-20",
+     "2023-02-24"
+    ],
+    "n_dates": 5,
+    "days_left_range": [
+     36,
+     40
+    ],
+    "classes": {
+     "Economy": 24503,
+     "Business": 12981,
+     "Premium Economy": 6997
+    },
+    "airlines": {
+     "Vistara": 22732,
+     "Air India": 11775,
+     "Indigo": 6453,
+     "AirAsia": 1564,
+     "GO FIRST": 1083,
+     "SpiceJet": 603,
+     "AkasaAir": 228,
+     "AllianceAir": 37,
+     "StarAir": 6
+    },
+    "flight_codes": 1270
+   },
+   "test": {
+    "rows": 88773,
+    "journey_dates": [
+     "2023-02-25",
+     "2023-03-06"
+    ],
+    "n_dates": 10,
+    "days_left_range": [
+     41,
+     50
+    ],
+    "classes": {
+     "Economy": 48907,
+     "Business": 26257,
+     "Premium Economy": 13609
+    },
+    "airlines": {
+     "Vistara": 44889,
+     "Air India": 23766,
+     "Indigo": 13107,
+     "AirAsia": 3122,
+     "GO FIRST": 2234,
+     "SpiceJet": 1123,
+     "AkasaAir": 445,
+     "AllianceAir": 75,
+     "StarAir": 12
+    },
+    "flight_codes": 1285
+   }
+  },
+  "overlap_val_vs_train": {
+   "flight_code": {
+    "rows_with_key_in_train": 44475,
+    "share": 0.9999,
+    "distinct_keys_in_target": 1270,
+    "distinct_keys_unseen_in_train": 2
+   },
+   "airline+route+class": {
+    "rows_with_key_in_train": 44481,
+    "share": 1.0,
+    "distinct_keys_in_target": 373,
+    "distinct_keys_unseen_in_train": 0
+   },
+   "airline+flight+route+class": {
+    "rows_with_key_in_train": 44467,
+    "share": 0.9997,
+    "distinct_keys_in_target": 5016,
+    "distinct_keys_unseen_in_train": 7
+   },
+   "itinerary (series + dep time + duration + stops)": {
+    "rows_with_key_in_train": 44183,
+    "share": 0.9933,
+    "distinct_keys_in_target": 11689,
+    "distinct_keys_unseen_in_train": 186
+   }
+  },
+  "overlap_test_vs_train": {
+   "flight_code": {
+    "rows_with_key_in_train": 88770,
+    "share": 1.0,
+    "distinct_keys_in_target": 1285,
+    "distinct_keys_unseen_in_train": 1
+   },
+   "airline+route+class": {
+    "rows_with_key_in_train": 88773,
+    "share": 1.0,
+    "distinct_keys_in_target": 371,
+    "distinct_keys_unseen_in_train": 0
+   },
+   "airline+flight+route+class": {
+    "rows_with_key_in_train": 88754,
+    "share": 0.9998,
+    "distinct_keys_in_target": 5130,
+    "distinct_keys_unseen_in_train": 9
+   },
+   "itinerary (series + dep time + duration + stops)": {
+    "rows_with_key_in_train": 88081,
+    "share": 0.9922,
+    "distinct_keys_in_target": 12554,
+    "distinct_keys_unseen_in_train": 282
+   }
+  },
+  "twin_reference_validation_only": {
+   "val_rows": 44481,
+   "val_rows_with_itinerary_twin_in_train": 44183,
+   "share": 0.9933,
+   "median_abs_relative_gap_to_twin_median": 0.0748,
+   "p90_abs_relative_gap": 0.359
+  }
+ },
+ "block_table": [
+  {
+   "block": 0,
+   "role": "train",
+   "dates": "2023-01-16 to 2023-01-20",
+   "days_left": "1-5",
+   "rows": 42210
+  },
+  {
+   "block": 1,
+   "role": "train",
+   "dates": "2023-01-21 to 2023-01-25",
+   "days_left": "6-10",
+   "rows": 43095
+  },
+  {
+   "block": 2,
+   "role": "val",
+   "dates": "2023-01-26 to 2023-01-30",
+   "days_left": "11-15",
+   "rows": 45341
+  },
+  {
+   "block": 3,
+   "role": "train",
+   "dates": "2023-01-31 to 2023-02-04",
+   "days_left": "16-20",
+   "rows": 45745
+  },
+  {
+   "block": 4,
+   "role": "test",
+   "dates": "2023-02-05 to 2023-02-09",
+   "days_left": "21-25",
+   "rows": 45349
+  },
+  {
+   "block": 5,
+   "role": "train",
+   "dates": "2023-02-10 to 2023-02-14",
+   "days_left": "26-30",
+   "rows": 45548
+  },
+  {
+   "block": 6,
+   "role": "val",
+   "dates": "2023-02-15 to 2023-02-19",
+   "days_left": "31-35",
+   "rows": 44680
+  },
+  {
+   "block": 7,
+   "role": "train",
+   "dates": "2023-02-20 to 2023-02-24",
+   "days_left": "36-40",
+   "rows": 44481
+  },
+  {
+   "block": 8,
+   "role": "test",
+   "dates": "2023-02-25 to 2023-03-01",
+   "days_left": "41-45",
+   "rows": 44617
+  },
+  {
+   "block": 9,
+   "role": "train",
+   "dates": "2023-03-02 to 2023-03-06",
+   "days_left": "46-50",
+   "rows": 44156
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+# --- environments, caches, build output
+.venv/
+venv/
+__pycache__/
+*.pyc
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.db
+*.log
+.vercel/
+.pytest_cache/
+
+# --- data: raw and processed datasets stay local; the app needs only the supported-options file
+backend/data/raw/
+backend/data/processed/*
+!backend/data/processed/supported_options.json
+
+# --- ML artifacts: ONLY the selected Phase 6 model is deployed. Other models (some > 100 MB) and experiment outputs stay local.
+backend/saved_models/*
+!backend/saved_models/final/
+backend/experiments/
+
+# --- local tooling output
+docs/screenshots/

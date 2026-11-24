@@ -1,0 +1,149 @@
+[
+ {
+  "browser": "chrome",
+  "viewports": [
+   {
+    "viewport": "mobile-375x812",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "validationErrorsShown": 2,
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   },
+   {
+    "viewport": "tablet-768x1024",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   },
+   {
+    "viewport": "laptop-1366x768",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   }
+  ],
+  "version": "Chrome/158.0.8127.38"
+ },
+ {
+  "browser": "firefox",
+  "viewports": [
+   {
+    "viewport": "mobile-375x812",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "validationErrorsShown": 2,
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   },
+   {
+    "viewport": "tablet-768x1024",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   },
+   {
+    "viewport": "laptop-1366x768",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   }
+  ],
+  "version": "firefox/160.0"
+ },
+ {
+  "browser": "edge",
+  "viewports": [
+   {
+    "viewport": "mobile-375x812",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "validationErrorsShown": 2,
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   },
+   {
+    "viewport": "tablet-768x1024",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   },
+   {
+    "viewport": "laptop-1366x768",
+    "ok": true,
+    "durationPrefilled": "2h 15m",
+    "displayedFare": "₹31,112",
+    "directApiFare": "₹31,112",
+    "matchesDirectApi": true,
+    "limitationsShown": 6,
+    "typicalErrorShown": true,
+    "horizontalOverflow": false,
+    "aboutLoaded": true,
+    "aboutHorizontalOverflow": false,
+    "consoleErrors": []
+   }
+  ],
+  "version": "Edg/158.0.4370.33"
+ }
+]

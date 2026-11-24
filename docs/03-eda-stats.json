@@ -1,0 +1,644 @@
+{
+ "alignment": {
+  "alignment_checks": {
+   "price_equal": true,
+   "date_equal": true,
+   "source_equal": true,
+   "destination_equal": true,
+   "flight_code_equal": true,
+   "class_equal": true
+  },
+  "dep_bucket_matches_exact_time": 452088,
+  "arr_bucket_matches_exact_time": 452088,
+  "duration_consistent_with_clock_times": 452088,
+  "weekday_consistent": true,
+  "days_left_equals_date_minus_booking": true,
+  "n_rows_raw": 452088
+ },
+ "cleaning": {
+  "exact_duplicates_removed": 6722,
+  "rows_after_cleaning": 445366,
+  "rows_dropped_for_price_outliers": 0,
+  "nulls_after_cleaning": 0
+ },
+ "raw_shape": [
+  452088,
+  14
+ ],
+ "clean_shape": [
+  445366,
+  15
+ ],
+ "nulls_raw_cleaned_file": 0,
+ "nulls_raw_scraped_file": 0,
+ "dup": {
+  "extra_copies": 6722,
+  "rows_in_dup_groups": 12001,
+  "pct_extra": 1.49,
+  "group_size_counts": {
+   "2": 4089,
+   "3": 977,
+   "4": 177,
+   "5": 33,
+   "6": 2,
+   "7": 1
+  },
+  "extra_by_class_pct": {
+   "Business": 0.24,
+   "Economy": 1.47,
+   "Premium Economy": 3.71
+  },
+  "fare_same_in_all_copies": true,
+  "mean_fare_before_after": [
+   22840.1,
+   22919.7
+  ],
+  "median_fare_before_after": [
+   13407.0,
+   13362.0
+  ]
+ },
+ "target": {
+  "describe": {
+   "count": 445366.0,
+   "mean": 22919.747165252847,
+   "std": 20394.21403967002,
+   "min": 1307.0,
+   "25%": 8712.0,
+   "50%": 13362.0,
+   "75%": 36980.0,
+   "max": 143019.0
+  },
+  "skew": 1.3181000668144565,
+  "excess_kurtosis": 0.839798040593751,
+  "log_skew": 0.2808209604589169,
+  "log_excess_kurtosis": -0.8224971639459906,
+  "quantiles": {
+   "0.01": 2857.0,
+   "0.05": 4992.0,
+   "0.25": 8712.0,
+   "0.5": 13362.0,
+   "0.75": 36980.0,
+   "0.95": 62560.0,
+   "0.99": 83325.0,
+   "0.999": 104706.0
+  },
+  "non_positive": 0,
+  "by_class": {
+   "Business": {
+    "n": 126535,
+    "min": 12000.0,
+    "median": 50409.0,
+    "mean": 51632.3,
+    "max": 143019.0,
+    "skew": 0.57,
+    "log_skew": -0.78
+   },
+   "Economy": {
+    "n": 248323,
+    "min": 1307.0,
+    "median": 9494.0,
+    "mean": 10164.1,
+    "max": 54600.0,
+    "skew": 1.18,
+    "log_skew": -0.44
+   },
+   "First": {
+    "n": 144,
+    "min": 50855.0,
+    "median": 51268.0,
+    "mean": 60731.1,
+    "max": 102321.0,
+    "skew": 1.62,
+    "log_skew": 1.62
+   },
+   "Premium Economy": {
+    "n": 70364,
+    "min": 3439.0,
+    "median": 14956.0,
+    "mean": 16225.0,
+    "max": 73550.0,
+    "skew": 1.53,
+    "log_skew": -0.11
+   }
+  }
+ },
+ "categorical": {
+  "airline": {
+   "Vistara": 226204,
+   "Air India": 118405,
+   "Indigo": 65659,
+   "AirAsia": 15764,
+   "GO FIRST": 10786,
+   "SpiceJet": 5863,
+   "AkasaAir": 2230,
+   "AllianceAir": 393,
+   "StarAir": 62
+  },
+  "travel_class": {
+   "Economy": 248323,
+   "Business": 126535,
+   "Premium Economy": 70364,
+   "First": 144
+  },
+  "source": {
+   "Delhi": 82481,
+   "Mumbai": 79894,
+   "Bangalore": 72668,
+   "Hyderabad": 56054,
+   "Chennai": 55659,
+   "Kolkata": 54193,
+   "Ahmedabad": 44417
+  },
+  "destination": {
+   "Mumbai": 81675,
+   "Delhi": 76758,
+   "Bangalore": 71603,
+   "Hyderabad": 61775,
+   "Chennai": 57060,
+   "Kolkata": 53465,
+   "Ahmedabad": 43030
+  },
+  "stops": {
+   "1-stop": 366527,
+   "non-stop": 51755,
+   "2+-stop": 27084
+  },
+  "dep_bucket": {
+   "6 AM - 12 PM": 181019,
+   "After 6 PM": 126749,
+   "12 PM - 6 PM": 114743,
+   "Before 6 AM": 22855
+  },
+  "arr_bucket": {
+   "After 6 PM": 196972,
+   "6 AM - 12 PM": 117665,
+   "12 PM - 6 PM": 100322,
+   "Before 6 AM": 30407
+  }
+ },
+ "cardinality": {
+  "airline": 9,
+  "flight_code": 1405,
+  "travel_class": 4,
+  "source": 7,
+  "destination": 7,
+  "dep_bucket": 4,
+  "arr_bucket": 4,
+  "stops": 3
+ },
+ "class_by_airline": {
+  "Air India": {
+   "Business": 52256,
+   "Economy": 66005,
+   "First": 144,
+   "Premium Economy": 0
+  },
+  "AirAsia": {
+   "Business": 0,
+   "Economy": 15764,
+   "First": 0,
+   "Premium Economy": 0
+  },
+  "AkasaAir": {
+   "Business": 0,
+   "Economy": 2230,
+   "First": 0,
+   "Premium Economy": 0
+  },
+  "AllianceAir": {
+   "Business": 0,
+   "Economy": 393,
+   "First": 0,
+   "Premium Economy": 0
+  },
+  "GO FIRST": {
+   "Business": 0,
+   "Economy": 10786,
+   "First": 0,
+   "Premium Economy": 0
+  },
+  "Indigo": {
+   "Business": 0,
+   "Economy": 65659,
+   "First": 0,
+   "Premium Economy": 0
+  },
+  "SpiceJet": {
+   "Business": 0,
+   "Economy": 5863,
+   "First": 0,
+   "Premium Economy": 0
+  },
+  "StarAir": {
+   "Business": 0,
+   "Economy": 62,
+   "First": 0,
+   "Premium Economy": 0
+  },
+  "Vistara": {
+   "Business": 74279,
+   "Economy": 81561,
+   "First": 0,
+   "Premium Economy": 70364
+  }
+ },
+ "median_fare_class_airline": {
+  "Air India": {
+   "Business": 47937.0,
+   "Economy": 10868.0,
+   "First": 51268.0
+  },
+  "AirAsia": {
+   "Economy": 6478.0
+  },
+  "AkasaAir": {
+   "Economy": 2893.0
+  },
+  "AllianceAir": {
+   "Economy": 3799.0
+  },
+  "GO FIRST": {
+   "Economy": 7110.0
+  },
+  "Indigo": {
+   "Economy": 7557.0
+  },
+  "SpiceJet": {
+   "Economy": 7555.0
+  },
+  "StarAir": {
+   "Economy": 4688.0
+  },
+  "Vistara": {
+   "Business": 53624.0,
+   "Economy": 11572.0,
+   "Premium Economy": 14956.0
+  }
+ },
+ "flight_code": {
+  "n": 1405,
+  "median_rows": 93.0,
+  "max_rows": 5117,
+  "codes_lt_50_rows": 448,
+  "codes_in_airlines": 0
+ },
+ "median_fare_by": {
+  "airline_economy": {
+   "Air India": 10868.0,
+   "AirAsia": 6478.0,
+   "AkasaAir": 2893.0,
+   "AllianceAir": 3799.0,
+   "GO FIRST": 7110.0,
+   "Indigo": 7557.0,
+   "SpiceJet": 7555.0,
+   "StarAir": 4688.0,
+   "Vistara": 11572.0
+  },
+  "stops_by_class": {
+   "Business": {
+    "1-stop": 51830.0,
+    "2+-stop": 63426.0,
+    "non-stop": 26915.0
+   },
+   "Economy": {
+    "1-stop": 10075.0,
+    "2+-stop": 12925.0,
+    "non-stop": 5737.0
+   },
+   "First": {
+    "1-stop": 102321.0,
+    "non-stop": 51268.0
+   },
+   "Premium Economy": {
+    "1-stop": 14841.0,
+    "2+-stop": 17916.0,
+    "non-stop": 7559.0
+   }
+  },
+  "weekday_economy": {
+   "Friday": 9630.0,
+   "Monday": 9367.0,
+   "Saturday": 9634.0,
+   "Sunday": 10127.0,
+   "Thursday": 9315.0,
+   "Tuesday": 9119.0,
+   "Wednesday": 9420.0
+  },
+  "dep_bucket_economy": {
+   "12 PM - 6 PM": 9624.0,
+   "6 AM - 12 PM": 10178.0,
+   "After 6 PM": 8902.0,
+   "Before 6 AM": 8265.0
+  },
+  "days_left_class": {
+   "Business": {
+    "(0, 1]": 59189.0,
+    "(1, 3]": 55537.0,
+    "(3, 7]": 53761.0,
+    "(7, 14]": 52215.0,
+    "(14, 21]": 51830.0,
+    "(21, 30]": 50284.0,
+    "(30, 50]": 49613.0
+   },
+   "Economy": {
+    "(0, 1]": 13298.0,
+    "(1, 3]": 12325.0,
+    "(3, 7]": 12612.0,
+    "(7, 14]": 11538.0,
+    "(14, 21]": 9447.0,
+    "(21, 30]": 8925.0,
+    "(30, 50]": 8480.0
+   },
+   "Premium Economy": {
+    "(0, 1]": 26342.0,
+    "(1, 3]": 22578.0,
+    "(3, 7]": 21817.0,
+    "(7, 14]": 18310.0,
+    "(14, 21]": 15274.0,
+    "(21, 30]": 13911.0,
+    "(30, 50]": 13178.0
+   }
+  }
+ },
+ "pearson_with_fare_by_class": {
+  "Business": {
+   "duration_hours": 0.177,
+   "days_left": -0.207,
+   "dep_minutes": 0.037
+  },
+  "Economy": {
+   "duration_hours": 0.333,
+   "days_left": -0.308,
+   "dep_minutes": -0.038
+  },
+  "Premium Economy": {
+   "duration_hours": 0.164,
+   "days_left": -0.481,
+   "dep_minutes": -0.052
+  }
+ },
+ "eta_squared_log_fare": {
+  "travel_class": 0.755,
+  "airline": 0.274,
+  "stops": 0.109,
+  "source": 0.007,
+  "destination": 0.006,
+  "dep_bucket": 0.011,
+  "arr_bucket": 0.013,
+  "route": 0.019,
+  "weekday": 0.0,
+  "flight_code": 0.362,
+  "days_left_as_category": 0.019
+ },
+ "eta_squared_log_fare_economy_only": {
+  "airline": 0.235,
+  "stops": 0.272,
+  "route": 0.111,
+  "weekday": 0.003,
+  "dep_bucket": 0.014,
+  "days_left": 0.103
+ },
+ "duration_by_stops": {
+  "1-stop": {
+   "mean": 13.22,
+   "min": 2.67,
+   "50%": 12.25,
+   "max": 43.58
+  },
+  "2+-stop": {
+   "mean": 17.32,
+   "min": 4.0,
+   "50%": 14.83,
+   "max": 42.92
+  },
+  "non-stop": {
+   "mean": 2.11,
+   "min": 0.75,
+   "50%": 2.17,
+   "max": 3.5
+  }
+ },
+ "numeric_corr": {
+  "fare": {
+   "fare": 1.0,
+   "log_fare": 0.936,
+   "duration_hours": 0.193,
+   "days_left": -0.087,
+   "dep_minutes": 0.029,
+   "arr_minutes": 0.081
+  },
+  "log_fare": {
+   "fare": 0.936,
+   "log_fare": 1.0,
+   "duration_hours": 0.285,
+   "days_left": -0.119,
+   "dep_minutes": 0.015,
+   "arr_minutes": 0.1
+  },
+  "duration_hours": {
+   "fare": 0.193,
+   "log_fare": 0.285,
+   "duration_hours": 1.0,
+   "days_left": -0.033,
+   "dep_minutes": 0.134,
+   "arr_minutes": -0.011
+  },
+  "days_left": {
+   "fare": -0.087,
+   "log_fare": -0.119,
+   "duration_hours": -0.033,
+   "days_left": 1.0,
+   "dep_minutes": -0.01,
+   "arr_minutes": 0.011
+  },
+  "dep_minutes": {
+   "fare": 0.029,
+   "log_fare": 0.015,
+   "duration_hours": 0.134,
+   "days_left": -0.01,
+   "dep_minutes": 1.0,
+   "arr_minutes": -0.131
+  },
+  "arr_minutes": {
+   "fare": 0.081,
+   "log_fare": 0.1,
+   "duration_hours": -0.011,
+   "days_left": 0.011,
+   "dep_minutes": -0.131,
+   "arr_minutes": 1.0
+  }
+ },
+ "outliers_iqr_log_airline_class_stops": {
+  "total": 9065,
+  "pct": 2.04,
+  "high": 5620,
+  "low": 3445,
+  "by_class": {
+   "Economy": 5494,
+   "Business": 2145,
+   "Premium Economy": 1426
+  },
+  "high_with_days_left_le_2": 1168,
+  "low_by_stops": {
+   "1-stop": 2095,
+   "non-stop": 757,
+   "2+-stop": 593
+  },
+  "high_by_stops": {
+   "1-stop": 4560,
+   "2+-stop": 539,
+   "non-stop": 521
+  }
+ },
+ "extremes": {
+  "top5": [
+   {
+    "airline": "Vistara",
+    "travel_class": "Business",
+    "source": "Ahmedabad",
+    "destination": "Chennai",
+    "stops": "1-stop",
+    "days_left": 2,
+    "fare": 143019
+   },
+   {
+    "airline": "Vistara",
+    "travel_class": "Business",
+    "source": "Mumbai",
+    "destination": "Chennai",
+    "stops": "2+-stop",
+    "days_left": 14,
+    "fare": 138951
+   },
+   {
+    "airline": "Vistara",
+    "travel_class": "Business",
+    "source": "Chennai",
+    "destination": "Mumbai",
+    "stops": "1-stop",
+    "days_left": 7,
+    "fare": 138496
+   },
+   {
+    "airline": "Vistara",
+    "travel_class": "Business",
+    "source": "Kolkata",
+    "destination": "Mumbai",
+    "stops": "1-stop",
+    "days_left": 9,
+    "fare": 137275
+   },
+   {
+    "airline": "Vistara",
+    "travel_class": "Business",
+    "source": "Chennai",
+    "destination": "Mumbai",
+    "stops": "1-stop",
+    "days_left": 7,
+    "fare": 131283
+   }
+  ],
+  "bottom5": [
+   {
+    "airline": "SpiceJet",
+    "travel_class": "Economy",
+    "source": "Bangalore",
+    "destination": "Chennai",
+    "stops": "non-stop",
+    "days_left": 9,
+    "fare": 1307
+   },
+   {
+    "airline": "Indigo",
+    "travel_class": "Economy",
+    "source": "Bangalore",
+    "destination": "Chennai",
+    "stops": "non-stop",
+    "days_left": 22,
+    "fare": 1400
+   },
+   {
+    "airline": "Indigo",
+    "travel_class": "Economy",
+    "source": "Bangalore",
+    "destination": "Chennai",
+    "stops": "non-stop",
+    "days_left": 29,
+    "fare": 1400
+   },
+   {
+    "airline": "Indigo",
+    "travel_class": "Economy",
+    "source": "Bangalore",
+    "destination": "Chennai",
+    "stops": "non-stop",
+    "days_left": 30,
+    "fare": 1400
+   },
+   {
+    "airline": "Indigo",
+    "travel_class": "Economy",
+    "source": "Bangalore",
+    "destination": "Chennai",
+    "stops": "non-stop",
+    "days_left": 33,
+    "fare": 1400
+   }
+  ],
+  "business_min_fare_rows_at_12000": 32,
+  "business_rows_le_12500": 403,
+  "duration_gt_30h": 4924
+ },
+ "grain": {
+  "rows_per_flight_route_class_date": {
+   "1": 123230,
+   "2": 34368,
+   "3": 25027,
+   "4": 13785,
+   "5": 6127,
+   "6": 3285,
+   "7": 2295,
+   "8": 1404
+  },
+  "series_airline_flight_route_class": 5833,
+  "series_median_rows": 48.0,
+  "series_max_rows": 942,
+  "keys_with_multiple_rows_differ_in_arrival_time_share": 0.997
+ },
+ "leakage": {
+  "days_left_is_function_of_date": true,
+  "weekday_is_function_of_date": true,
+  "flight_code_determines_airline": true,
+  "buckets_redundant_with_exact_times": [
+   452088,
+   452088
+  ],
+  "duration_consistent_with_clock_times": 452088
+ },
+ "chronological_preview": {
+  "n_dates": 50,
+  "first": "2023-01-16",
+  "last": "2023-03-06",
+  "last_20pct_dates_start": "2023-02-25",
+  "test_rows": 88802,
+  "train_rows": 356564,
+  "train_days_left_range": [
+   1,
+   40
+  ],
+  "test_days_left_range": [
+   41,
+   50
+  ],
+  "median_fare_train_test": [
+   13777.0,
+   11874.5
+  ],
+  "flight_codes_in_test_not_in_train": 1,
+  "rows_per_date_min_max": [
+   8027,
+   9679
+  ]
+ }
+}

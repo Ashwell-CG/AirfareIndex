@@ -1,0 +1,163 @@
+{
+ "primary": {
+  "files_present": {
+   "frozen.json": true,
+   "results.json": true,
+   "test_predictions.npz": true,
+   "results_long.csv": true,
+   "metadata.json": true
+  },
+  "all_14_entries": true,
+  "frozen_sha256": "67d4ad022e4effc70c2af98f51c5c88cd33436d3df10ffa6e6ab99f373bb3470",
+  "frozen_checksum_matches_results_and_metadata": true,
+  "mtime_order_frozen_lt_results_lt_preds": true,
+  "frozen_json_has_no_test_fields": true,
+  "log_FROZEN_line_before_every_test_line": true,
+  "log_has_done_line": true,
+  "log_error_warning_lines": [],
+  "test_y_matches_split_rows_and_is_inr": true,
+  "max_relative_difference_recomputed_vs_reported_metrics": 3.920866454795632e-07,
+  "no_nan_metrics": true,
+  "no_flight_code_in_features": true,
+  "saved_models": {
+   "class_median_baseline|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0,
+    "mb": 0.0
+   },
+   "decision_tree|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.003125000002910383,
+    "mb": 2.09
+   },
+   "decision_tree|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.002794360480038449,
+    "mb": 2.48
+   },
+   "gradient_boosting|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019486208402668126,
+    "mb": 0.99
+   },
+   "gradient_boosting|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019351090231793933,
+    "mb": 0.94
+   },
+   "linear_regression|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019516717729857191,
+    "mb": 0.0
+   },
+   "linear_regression|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019519471534295008,
+    "mb": 0.01
+   },
+   "mean_baseline|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.00031692119591753,
+    "mb": 0.0
+   },
+   "random_forest|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.00315845591831021,
+    "mb": 98.29
+   },
+   "random_forest|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0035523355909390375,
+    "mb": 110.42
+   },
+   "ridge|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019495819869916886,
+    "mb": 0.0
+   },
+   "ridge|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.001942765899002552,
+    "mb": 0.0
+   },
+   "xgboost|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0,
+    "mb": 4.79
+   },
+   "xgboost|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0,
+    "mb": 6.36
+   }
+  }
+ },
+ "group": {
+  "files_present": {
+   "frozen.json": true,
+   "results.json": true,
+   "test_predictions.npz": true,
+   "results_long.csv": true,
+   "metadata.json": true
+  },
+  "all_14_entries": true,
+  "frozen_sha256": "45c518d2831d801a73bc798b3b7fce0b6db131e1ada825898a94abc879f16a8e",
+  "frozen_checksum_matches_results_and_metadata": true,
+  "mtime_order_frozen_lt_results_lt_preds": true,
+  "frozen_json_has_no_test_fields": true,
+  "log_FROZEN_line_before_every_test_line": true,
+  "log_has_done_line": true,
+  "log_error_warning_lines": [],
+  "test_y_matches_split_rows_and_is_inr": true,
+  "max_relative_difference_recomputed_vs_reported_metrics": 1.7361769991626215e-07,
+  "no_nan_metrics": true,
+  "no_flight_code_in_features": true,
+  "saved_models": {
+   "random_forest|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019387690044823103,
+    "mb": 78.24
+   },
+   "random_forest|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019323167798575014,
+    "mb": 88.02
+   }
+  }
+ },
+ "stress": {
+  "files_present": {
+   "frozen.json": true,
+   "results.json": true,
+   "test_predictions.npz": true,
+   "results_long.csv": true,
+   "metadata.json": true
+  },
+  "all_14_entries": true,
+  "frozen_sha256": "9e26472bec972ca9fbeaa2024baa464f93ffe9e0676e3624bf9e16d6cf088e0e",
+  "frozen_checksum_matches_results_and_metadata": true,
+  "mtime_order_frozen_lt_results_lt_preds": true,
+  "frozen_json_has_no_test_fields": true,
+  "log_FROZEN_line_before_every_test_line": true,
+  "log_has_done_line": true,
+  "log_error_warning_lines": [],
+  "test_y_matches_split_rows_and_is_inr": true,
+  "max_relative_difference_recomputed_vs_reported_metrics": 3.611931142154041e-07,
+  "no_nan_metrics": true,
+  "no_flight_code_in_features": true,
+  "saved_models": {
+   "random_forest|fare": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.0019272245262982324,
+    "mb": 117.83
+   },
+   "random_forest|log1p": {
+    "ok": true,
+    "max_abs_diff_vs_stored_inr": 0.001946985699760262,
+    "mb": 131.93
+   }
+  }
+ },
+ "learning_curves_exists": true,
+ "split_and_data_hashes_consistent": true
+}
