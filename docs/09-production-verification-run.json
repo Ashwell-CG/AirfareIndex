@@ -1,0 +1,249 @@
+{
+ "frontend": "https://airfare-index-puce.vercel.app",
+ "api": "https://airfareindex-api.onrender.com",
+ "when": "2026-11-24T18:31:15.036Z",
+ "passed": 40,
+ "failed": 0,
+ "results": [
+  {
+   "name": "API /health (also wakes a sleeping free-tier instance)",
+   "ok": true,
+   "detail": "ok",
+   "ms": 1110
+  },
+  {
+   "name": "API /ready: model loaded",
+   "ok": true,
+   "detail": "blend_rf_lookup",
+   "ms": 303
+  },
+  {
+   "name": "API uses HTTPS (or local)",
+   "ok": true,
+   "detail": "https",
+   "ms": 0
+  },
+  {
+   "name": "API /options: 9 airlines, 7 cities, no First class",
+   "ok": true,
+   "detail": "7 cities, 9 airlines",
+   "ms": 360
+  },
+  {
+   "name": "predict: Delhi-Mumbai Vistara Economy",
+   "ok": true,
+   "detail": "INR 7220",
+   "ms": 589
+  },
+  {
+   "name": "predict: Delhi-Mumbai Vistara Business",
+   "ok": true,
+   "detail": "INR 31112",
+   "ms": 544
+  },
+  {
+   "name": "predict: Delhi-Mumbai Vistara Premium Economy",
+   "ok": true,
+   "detail": "INR 9859",
+   "ms": 333
+  },
+  {
+   "name": "predict: Bangalore-Kolkata Air India Business 1-stop",
+   "ok": true,
+   "detail": "INR 60658",
+   "ms": 298
+  },
+  {
+   "name": "predict: Chennai-Hyderabad Indigo Economy",
+   "ok": true,
+   "detail": "INR 4363",
+   "ms": 422
+  },
+  {
+   "name": "predictions differ by class and are deterministic",
+   "ok": true,
+   "detail": "7220 twice",
+   "ms": 537
+  },
+  {
+   "name": "invalid input: First class rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 349
+  },
+  {
+   "name": "invalid input: days_left 51 rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 281
+  },
+  {
+   "name": "invalid input: days_left 0 rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 491
+  },
+  {
+   "name": "invalid input: unsupported airline/class rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 437
+  },
+  {
+   "name": "invalid input: same city rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 355
+  },
+  {
+   "name": "invalid input: duration out of range rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 171
+  },
+  {
+   "name": "invalid input: unknown field rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 321
+  },
+  {
+   "name": "invalid input: missing field rejected",
+   "ok": true,
+   "detail": "422",
+   "ms": 118
+  },
+  {
+   "name": "malformed JSON rejected without internals",
+   "ok": true,
+   "detail": "422",
+   "ms": 138
+  },
+  {
+   "name": "CORS: frontend origin allowed",
+   "ok": true,
+   "detail": "https://airfare-index-puce.vercel.app",
+   "ms": 130
+  },
+  {
+   "name": "CORS: foreign origin not allowed, no wildcard",
+   "ok": true,
+   "detail": "blocked",
+   "ms": 731
+  },
+  {
+   "name": "API docs/openapi not public",
+   "ok": true,
+   "detail": "404",
+   "ms": 420
+  },
+  {
+   "name": "API timing: warm /predict",
+   "ok": true,
+   "detail": "median 302 ms (network included)",
+   "ms": 2090
+  },
+  {
+   "name": "frontend GET / serves the app (direct URL / refresh)",
+   "ok": true,
+   "detail": 200,
+   "ms": 560
+  },
+  {
+   "name": "frontend GET /predict serves the app (direct URL / refresh)",
+   "ok": true,
+   "detail": 200,
+   "ms": 1866
+  },
+  {
+   "name": "frontend GET /methodology serves the app (direct URL / refresh)",
+   "ok": true,
+   "detail": 200,
+   "ms": 76
+  },
+  {
+   "name": "frontend GET /about serves the app (direct URL / refresh)",
+   "ok": true,
+   "detail": 200,
+   "ms": 77
+  },
+  {
+   "name": "frontend serves hashed assets with caching",
+   "ok": true,
+   "detail": "public, max-age=31536000, immutable",
+   "ms": 136
+  },
+  {
+   "name": "[desktop] landing: 3D canvas renders, no overflow",
+   "ok": true,
+   "detail": "canvas ok",
+   "ms": 9680
+  },
+  {
+   "name": "[desktop] direct load of /predict, submit valid itinerary, genuine INR fare",
+   "ok": true,
+   "detail": "₹7,220",
+   "ms": 4391
+  },
+  {
+   "name": "[desktop] unsupported/invalid input shows validation, no request needed",
+   "ok": true,
+   "detail": "5 errors",
+   "ms": 1085
+  },
+  {
+   "name": "[desktop] backend error handled (API unreachable)",
+   "ok": true,
+   "detail": "friendly error shown",
+   "ms": 372
+  },
+  {
+   "name": "[desktop] methodology page via refresh of /methodology",
+   "ok": true,
+   "detail": "ok",
+   "ms": 1524
+  },
+  {
+   "name": "[desktop] no console errors",
+   "ok": true,
+   "detail": "0",
+   "ms": 0
+  },
+  {
+   "name": "[mobile] landing: 3D canvas renders, no overflow",
+   "ok": true,
+   "detail": "canvas ok",
+   "ms": 4933
+  },
+  {
+   "name": "[mobile] direct load of /predict, submit valid itinerary, genuine INR fare",
+   "ok": true,
+   "detail": "₹7,220",
+   "ms": 5144
+  },
+  {
+   "name": "[mobile] unsupported/invalid input shows validation, no request needed",
+   "ok": true,
+   "detail": "5 errors",
+   "ms": 1076
+  },
+  {
+   "name": "[mobile] backend error handled (API unreachable)",
+   "ok": true,
+   "detail": "friendly error shown",
+   "ms": 375
+  },
+  {
+   "name": "[mobile] methodology page via refresh of /methodology",
+   "ok": true,
+   "detail": "ok",
+   "ms": 1355
+  },
+  {
+   "name": "[mobile] no console errors",
+   "ok": true,
+   "detail": "0",
+   "ms": 0
+  }
+ ]
+}

@@ -81,7 +81,7 @@ node e2e/verify-deployment.mjs https://<your-frontend> https://<your-api> --brow
 
 It checks: health/ready (this also wakes a sleeping instance), HTTPS, options, genuine predictions across routes and classes, determinism, validation rejects (First class, days 0/51, same city, bad duration, unknown/missing fields, malformed JSON), CORS allowed/blocked, docs not public, direct-route loads (`/`, `/predict`, `/methodology`), and with `--browser` desktop and mobile Chrome (3D canvas, prediction through the real UI, validation errors, unreachable-API error, refresh on `/methodology`, console errors). It writes `docs/09-verification-run.json` and screenshots to `docs/screenshots/phase9/`.
 
-The current `docs/09-verification-run.json` was produced by the **local** run described below, and the next run overwrites it.
+`docs/09-verification-run.json` is the record of the **local** Phase 9 run described below. The **production** run (https://airfare-index-puce.vercel.app and https://airfareindex-api.onrender.com, 40/40 passed) is kept in `docs/09-production-verification-run.json`. Each run overwrites `docs/09-verification-run.json`, so copy it first if you run the script against another URL.
 
 ## 7. Verification actually performed (local production-style stack, not public)
 
