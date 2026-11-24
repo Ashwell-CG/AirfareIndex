@@ -481,18 +481,3 @@ Links below point to files in this repository.
 | Final model selection | [`docs/06-final-model-selection.md`](docs/06-final-model-selection.md) |
 | Real-world validation procedure | [`reports/real_world_validation/README.md`](reports/real_world_validation/README.md) |
 | Deployment report | [`docs/09-production-deployment-report.md`](docs/09-production-deployment-report.md) |
-
-A PowerPoint presentation and an IEEE research paper are not yet in this repository.
-
-## Author
-
-| Field | Details |
-|---|---|
-| Student name | [Student name] |
-| University | [University name] |
-| Department | [Department] |
-| Programme and semester | [Programme], [Semester] |
-| Project supervisor | [Supervisor name] |
-| Academic year | [Year] |
-
-Contact and GitHub profile: [add if you wish to share them].
