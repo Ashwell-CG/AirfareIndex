@@ -40,7 +40,6 @@ A supervised machine learning application that estimates Indian domestic airfare
 16. [Limitations](#limitations)
 17. [Future improvements](#future-improvements)
 18. [Academic documentation](#academic-documentation)
-19. [Author](#author)
 
 ## Live demo
 
