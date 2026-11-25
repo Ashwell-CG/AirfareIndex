@@ -23,7 +23,7 @@ describe('Predict page with a stubbed backend (unit-test doubles)', () => {
     const { calls } = stubFetch()
     const user = userEvent.setup()
     renderApp()
-    expect(await screen.findByText(/Loading supported options/, {}, { timeout: 5000 })).toBeInTheDocument() // lazy page chunk can be slow on a cold run
+    expect(await screen.findByText(/Loading supported options/)).toBeInTheDocument()
     await fillAndSubmit(user)
     expect(await screen.findByTestId('predicted-fare')).toHaveTextContent('₹7,220')
     const post = calls.find((c) => c.path === '/predict')
@@ -147,7 +147,7 @@ describe('Landing page', () => {
   it('renders the hero, real coverage facts and calls to action, with the 3D layer falling back when WebGL is absent', async () => {
     stubFetch()
     renderApp('/')
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('What should this flight cost?')
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Understand airfares\.\s*Travel smarter\./)
     expect(screen.getAllByRole('link', { name: /Estimate a fare/ })[0]).toHaveAttribute('href', '/predict')
     // jsdom has no WebGL: the static aircraft illustration is used
     expect(document.querySelector('svg[aria-label*="passenger aircraft"]')).toBeInTheDocument()

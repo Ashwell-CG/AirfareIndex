@@ -5,7 +5,6 @@ import * as THREE from 'three'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
 import Aircraft from './Aircraft'
 import Clouds from './Clouds'
-import Network from './Network'
 
 // Image-based lighting generated in memory (no HDR download)
 function StudioEnvironment() {
@@ -84,7 +83,7 @@ function FrameGuard({ onSlow }) {
   return null
 }
 
-export default function HeroScene({ heroRef, active, reducedMotion, lowPower, finePointer, onReady, pairs }) {
+export default function HeroScene({ heroRef, active, reducedMotion, lowPower, finePointer, onReady }) {
   const [slow, setSlow] = useState(false)
   const animate = active && !reducedMotion && !slow
   return (
@@ -102,15 +101,14 @@ export default function HeroScene({ heroRef, active, reducedMotion, lowPower, fi
         onReady?.()
       }}
     >
-      <fog attach="fog" args={['#0c1d3b', 16, 52]} />
+      <fog attach="fog" args={['#0f2140', 14, 48]} />
       <StudioEnvironment />
-      <hemisphereLight args={['#c4d8ff', '#081530', 0.4]} />
-      <directionalLight position={[7, 3, 9]} intensity={2.4} color="#ffd29a" />
-      <directionalLight position={[-7, 5, -7]} intensity={1.8} color="#62d4ee" />
-      <directionalLight position={[0, -6, 4]} intensity={0.45} color="#f2b05e" />
+      <hemisphereLight args={['#c4d8ff', '#0a1630', 0.45]} />
+      <directionalLight position={[7, 3, 9]} intensity={2.6} color="#ffd6a3" />
+      <directionalLight position={[-7, 5, -7]} intensity={1.8} color="#63d3ff" />
+      <directionalLight position={[0, -6, 4]} intensity={0.35} color="#4c8dff" />
       <Rig heroRef={heroRef} animate={animate} lowPower={lowPower} finePointer={finePointer} />
-      <Network pairs={pairs} animate={animate} pulses={lowPower ? 6 : 14} />
-      <Clouds count={lowPower ? 10 : 22} animate={animate} />
+      <Clouds count={lowPower ? 10 : 24} animate={animate} />
       {animate && <FrameGuard onSlow={() => setSlow(true)} />}
     </Canvas>
   )

@@ -1,41 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { animate, m, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 import { formatInr } from '../../lib/format'
 
-// Departure-board fare: digits cycle and settle left to right, like split-flap tiles.
-// The tiles are decorative; the exact value is always present for assistive tech (and tests) in the sr-only span.
-const TICK = 55
-export function FlapFare({ value, testId, className = '' }) {
+// Counts up to the new fare. The animated digits are decorative; the exact value is always present for assistive tech.
+export function CountUp({ value, testId }) {
   const reduce = useReducedMotion()
-  const target = formatInr(value)
-  const [shown, setShown] = useState(target)
+  const ref = useRef(null)
+  const prev = useRef(null)
   useEffect(() => {
-    if (reduce) return undefined
-    const start = performance.now()
-    let raf
-    const tick = (now) => {
-      const el = now - start
-      const step = Math.floor(el / TICK)
-      let done = true
-      const s = [...target].map((ch, i) => {
-        if (!/\d/.test(ch) || el >= 220 + i * 85) return ch
-        done = false
-        return String((i * 7 + step * 3) % 10)
-      }).join('')
-      setShown(s)
-      if (!done) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [target, reduce])
+    const el = ref.current
+    if (!el) return undefined
+    const from = prev.current ?? value * 0.82
+    prev.current = value
+    if (reduce) { el.textContent = formatInr(value); return undefined }
+    const c = animate(from, value, { duration: 1.1, ease: [0.22, 1, 0.36, 1], onUpdate: (v) => { el.textContent = formatInr(v) } })
+    return () => c.stop()
+  }, [value, reduce])
   return (
     <>
-      <span aria-hidden="true" className={`inline-flex items-stretch gap-[0.05em] tabular ${className}`}>
-        {[...(reduce ? target : shown)].map((ch, i) => /\d/.test(ch)
-          ? <span key={i} className="relative inline-block min-w-[0.62em] rounded-[0.09em] bg-[linear-gradient(180deg,#10213e_0%,#0c1a32_49.5%,#091429_50.5%,#0c1a32_100%)] px-[0.05em] text-center shadow-[inset_0_1px_0_rgb(255_255_255/0.08),0_0.06em_0.12em_rgb(0_0_0/0.5)]">{ch}</span>
-          : <span key={i} className="inline-block px-[0.02em] text-mist">{ch}</span>)}
-      </span>
-      <span className="sr-only" data-testid={testId}>{target}</span>
+      <span ref={ref} aria-hidden="true" className="tabular">{formatInr(value)}</span>
+      <span className="sr-only" data-testid={testId}>{formatInr(value)}</span>
     </>
   )
 }
@@ -57,20 +41,23 @@ export function RouteArc({ runKey, loop = false, className = '' }) {
   const d = `M${P0[0]} ${P0[1]} Q${P1[0]} ${P1[1]} ${P2[0]} ${P2[1]}`
   return (
     <svg viewBox="0 0 300 78" className={className} aria-hidden="true">
-      <path d={d} fill="none" stroke="rgb(255 255 255 / 0.16)" strokeWidth="1.5" strokeDasharray="3 6" />
-      <m.path d={d} fill="none" stroke="#62d4ee" strokeWidth="2" strokeLinecap="round" style={{ pathLength: loop ? 1 : t }} opacity={loop ? 0.3 : 1} />
-      <circle cx={P0[0]} cy={P0[1]} r="4.5" fill="#f2b05e" stroke="#060e1f" strokeWidth="2" />
-      <circle cx={P2[0]} cy={P2[1]} r="4.5" fill="#f2b05e" stroke="#060e1f" strokeWidth="2" />
+      <defs>
+        <linearGradient id="arc-g" x1="0" x2="1"><stop offset="0" stopColor="#4c8dff" /><stop offset="1" stopColor="#3fd0ee" /></linearGradient>
+      </defs>
+      <path d={d} fill="none" stroke="rgb(255 255 255 / 0.14)" strokeWidth="1.5" strokeDasharray="3 6" />
+      <m.path d={d} fill="none" stroke="url(#arc-g)" strokeWidth="2" strokeLinecap="round" style={{ pathLength: loop ? 1 : t }} opacity={loop ? 0.35 : 1} />
+      <circle cx={P0[0]} cy={P0[1]} r="4" fill="#0a1628" stroke="#4c8dff" strokeWidth="2" />
+      <circle cx={P2[0]} cy={P2[1]} r="4" fill="#0a1628" stroke="#3fd0ee" strokeWidth="2" />
       <g transform={`translate(${x} ${y}) rotate(${tangent(Math.min(Math.max(t, 0.001), 0.999))})`}>
-        <circle r="11" fill="rgb(98 212 238 / 0.14)" />
-        <path d="M8 0 L -5 -6.5 L -3 0 L -5 6.5 Z" fill="#edf2f8" />
+        <circle r="11" fill="rgb(63 208 238 / 0.12)" />
+        <path d="M8 0 L -5 -6.5 L -3 0 L -5 6.5 Z" fill="#eaf0f9" />
       </g>
     </svg>
   )
 }
 
 // Subtle pointer-driven 3D tilt for desktop pointers; inert on touch devices and with reduced motion.
-export function TiltCard({ children, className = '', max = 3 }) {
+export function TiltCard({ children, className = '', max = 4 }) {
   const reduce = useReducedMotion()
   const [fine] = useState(() => typeof window !== 'undefined' && !!window.matchMedia?.('(pointer: fine)').matches)
   const mx = useMotionValue(0), my = useMotionValue(0)
@@ -80,7 +67,7 @@ export function TiltCard({ children, className = '', max = 3 }) {
   return (
     <m.div
       className="[perspective:1400px]"
-      initial={reduce ? false : { opacity: 0, rotateX: 12, y: 24 }}
+      initial={reduce ? false : { opacity: 0, rotateX: 14, y: 24 }}
       animate={{ opacity: 1, rotateX: 0, y: 0 }}
       transition={{ type: 'spring', stiffness: 90, damping: 16 }}
     >
@@ -102,12 +89,11 @@ export function TiltCard({ children, className = '', max = 3 }) {
 // Thin meter showing a factor's share of the model's total SHAP attribution
 export function ShareMeter({ pct, max = 60 }) {
   const reduce = useReducedMotion()
-  const w = `${Math.min(pct / max, 1) * 100}%`
   return (
     <span className="relative block h-1.5 w-full overflow-hidden rounded-full bg-white/[0.07]" aria-hidden="true">
-      <m.span className="absolute inset-y-0 left-0 rounded-full bg-cyan"
-        initial={reduce ? false : { width: 0 }} whileInView={{ width: w }}
-        animate={reduce ? { width: w } : undefined}
+      <m.span className="absolute inset-y-0 left-0 rounded-full bg-[linear-gradient(90deg,var(--color-azure),var(--color-cyan))]"
+        initial={reduce ? false : { width: 0 }} whileInView={{ width: `${Math.min(pct / max, 1) * 100}%` }}
+        animate={reduce ? { width: `${Math.min(pct / max, 1) * 100}%` } : undefined}
         viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} />
     </span>
   )

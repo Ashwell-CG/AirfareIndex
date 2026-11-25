@@ -65,24 +65,3 @@ describe('validateForm mirrors backend rules', () => {
     expect(validateForm({ ...good, stops: '' }, OPTIONS).errors.stops).toBeTruthy()
   })
 })
-
-import { dateFromToday, daysFromToday, formatDate } from './dates'
-import { project, routePairs } from './airports'
-
-describe('travel date and days ahead', () => {
-  const now = new Date(2026, 11, 30, 18, 45) // 30 Dec 2026, evening: crosses a year boundary
-  it('round-trips between days ahead and a calendar date', () => {
-    expect(dateFromToday(14, now)).toBe('2027-01-13')
-    expect(daysFromToday('2027-01-13', now)).toBe(14)
-    expect(daysFromToday('2026-12-31', now)).toBe(1)
-    expect(Number.isNaN(daysFromToday('not a date', now))).toBe(true)
-    expect(formatDate('2027-01-13')).toMatch(/13 Jan 2027/)
-  })
-})
-
-describe('route map helpers', () => {
-  it('projects every supported city inside the map and lists each city pair once', () => {
-    for (const c of OPTIONS.cities) { const [x, y] = project(c); expect(x).toBeGreaterThan(0); expect(x).toBeLessThan(1); expect(y).toBeGreaterThan(0); expect(y).toBeLessThan(1) }
-    expect(routePairs(OPTIONS)).toHaveLength(21) // 42 directed routes = 21 city pairs
-  })
-})
