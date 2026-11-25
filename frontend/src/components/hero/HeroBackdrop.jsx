@@ -37,7 +37,6 @@ export default function HeroBackdrop({ heroRef }) {
   const show3d = webgl && !failed
   return (
     <div aria-hidden="true" className="sky pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[radial-gradient(60%_80%_at_70%_100%,rgb(242_182_109/0.14),transparent_70%)]" />
       {/* On small screens the aircraft gets its own band above the copy; on larger screens it sits beside it. */}
       <div className={`absolute inset-x-0 top-0 h-[52svh] transition-opacity duration-700 md:h-full ${show3d && ready ? 'opacity-0' : 'opacity-100'}`}>
         <AircraftPoster className="absolute left-1/2 top-[22%] w-[min(88vw,520px)] -translate-x-1/2 md:left-auto md:right-[3%] md:top-[24%] md:w-[min(48vw,700px)] md:translate-x-0" />

@@ -1,22 +1,19 @@
 @import "tailwindcss";
 
 /* ───────────────────────── AirfareIndex design tokens ─────────────────────────
-   Midnight cabin palette: deep navy surfaces, azure/cyan instrument accents,
-   one warm "horizon" accent used sparingly (dusk light in the hero, highlights). */
+   Night cabin: a navy neutral ramp, one cyan accent (primary action, selection, the fare that matters),
+   amber only for the origin marker and warnings. Depth comes from surface steps and hairlines, not glows. */
 @theme {
-  --color-night-950: #040914;
-  --color-night-900: #07101f;
-  --color-night-850: #0a1628;
+  --color-night-950: #040914;    /* page */
+  --color-night-900: #07101f;    /* card */
+  --color-night-850: #0a1628;    /* raised: inputs, active rows */
   --color-night-800: #0e1d35;
   --color-night-700: #152a4a;
-  --color-night-600: #1f3961;
-  --color-ink: #eaf0f9;          /* primary text on night */
+  --color-ink: #eaf0f9;          /* primary text */
   --color-mist: #a8b6cb;         /* secondary text (≥ 8:1 on night-900) */
-  --color-fog: #7f8fa8;          /* tertiary text (≥ 5:1 on night-900) */
-  --color-azure: #4c8dff;        /* primary action */
-  --color-azure-strong: #2f6fe8;
-  --color-cyan: #3fd0ee;         /* instrument accent, focus */
-  --color-horizon: #f2b66d;      /* warm accent, sparingly */
+  --color-fog: #7f8fa8;          /* muted text and icons (≥ 5:1 on night-900) */
+  --color-cyan: #3fd0ee;         /* the accent */
+  --color-horizon: #f2b66d;      /* origin marker, warnings */
   --color-danger: #ff7a85;
   --color-success: #4ade9b;
 
@@ -52,46 +49,22 @@
   select option { background: var(--color-night-850); color: var(--color-ink); }
 }
 
-/* Reusable surface and type utilities */
+/* Card: a surface step and a hairline. Nothing else. */
 @utility panel {
   position: relative;
-  border-radius: 1.125rem;
-  border: 1px solid rgb(255 255 255 / 0.08);
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0) 40%),
-    color-mix(in oklab, var(--color-night-900) 88%, transparent);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 30px 60px -40px rgb(0 0 0 / 0.9);
+  border-radius: 16px;
+  border: 1px solid rgb(234 240 249 / 0.08);
+  background: var(--color-night-900);
 }
-@utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-cyan);
-}
-@utility hairline { border-color: rgb(255 255 255 / 0.08); }
+@utility hairline { border-color: rgb(234 240 249 / 0.08); }
 @utility tabular { font-variant-numeric: tabular-nums; }
 
-/* Sky behind the hero and the 3D fallback */
+/* Night sky behind the hero and the 3D fallback: a tone shift within the navy, no colour washes */
 @utility sky {
-  background:
-    radial-gradient(120% 70% at 78% 108%, rgb(242 182 109 / 0.22), transparent 55%),
-    radial-gradient(90% 60% at 20% 0%, rgb(76 141 255 / 0.18), transparent 60%),
-    linear-gradient(180deg, #050b18 0%, #0a1830 45%, #13284a 78%, #1d3557 100%);
+  background: linear-gradient(180deg, #050b18 0%, #0a1830 45%, #13284a 78%, #1d3557 100%);
 }
 
-/* Subtle instrument grid used behind section headers */
-@utility grid-lines {
-  background-image:
-    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-}
-
-@keyframes dash-flow { to { stroke-dashoffset: -40; } }
 @keyframes sweep { to { transform: rotate(360deg); } }
-@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

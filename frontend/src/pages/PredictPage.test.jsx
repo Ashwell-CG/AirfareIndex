@@ -147,7 +147,7 @@ describe('Landing page', () => {
   it('renders the hero, real coverage facts and calls to action, with the 3D layer falling back when WebGL is absent', async () => {
     stubFetch()
     renderApp('/')
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Understand airfares\.\s*Travel smarter\./)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Fare estimates for Indian domestic flights')
     expect(screen.getAllByRole('link', { name: /Estimate a fare/ })[0]).toHaveAttribute('href', '/predict')
     // jsdom has no WebGL: the static aircraft illustration is used
     expect(document.querySelector('svg[aria-label*="passenger aircraft"]')).toBeInTheDocument()
