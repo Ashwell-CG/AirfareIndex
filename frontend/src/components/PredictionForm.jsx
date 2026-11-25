@@ -1,12 +1,25 @@
 import { useMemo, useState } from 'react'
 import { ArrowLeftRight, Plane } from 'lucide-react'
-import { Button, Field, SelectInput, Spinner, inputClass } from './ui/ui'
+import { Button, Field, FieldError, SelectInput, Spinner, inputClass } from './ui/ui'
 import { hoursToHM } from '../lib/format'
+import { dateFromToday, daysFromToday } from '../lib/dates'
 import { STOPS_LABEL, airlinesFor, classesFor, destinationsFor, durationHint, durationRange, sourceCities } from '../lib/options'
 import { INITIAL_VALUES, cascade } from '../lib/formState'
 import { validateForm } from '../lib/validate'
 
 const SERVER_FIELD = { duration_hours: 'duration' }
+
+function Group({ id, title, action, children }) {
+  return (
+    <section aria-labelledby={id} className="space-y-4">
+      <div className="flex min-h-11 items-center justify-between gap-3">
+        <h3 id={id} className="display-md text-[1.625rem] text-ink">{title}</h3>
+        {action}
+      </div>
+      {children}
+    </section>
+  )
+}
 
 export default function PredictionForm({ options, onSubmit, onDirty, submitting = false, serverFields = [] }) {
   const [values, setValues] = useState(INITIAL_VALUES)
@@ -25,6 +38,8 @@ export default function PredictionForm({ options, onSubmit, onDirty, submitting 
   const hint = values.source && values.destination ? durationHint(options, values.source, values.destination, values.stops) : null
   const range = durationRange(options, values.stops)
   const [dMin, dMax] = options.days_left_range
+  const days = Number(values.days_left)
+  const daysValid = Number.isInteger(days) && days >= dMin && days <= dMax
 
   function update(field, value) {
     setValues((prev) => {
@@ -38,6 +53,11 @@ export default function PredictionForm({ options, onSubmit, onDirty, submitting 
     })
     setTouched((t) => ({ ...t, [field]: true, [`edited_${field}`]: true }))
     onDirty?.()
+  }
+
+  function updateDate(isoDate) {
+    const d = daysFromToday(isoDate)
+    update('days_left', Number.isNaN(d) ? '' : String(d))
   }
 
   function updateDuration(field, value) {
@@ -86,23 +106,16 @@ export default function PredictionForm({ options, onSubmit, onDirty, submitting 
   }
 
   const blur = (k) => () => setTouched((t) => ({ ...t, [k]: true }))
-  const step = (n, id, title) => (
-    <h3 id={id} className="flex items-center gap-3 text-sm font-semibold text-ink">
-      <span className="grid h-7 w-7 place-items-center rounded-full border border-cyan/30 bg-cyan/[0.08] font-mono text-xs text-cyan">{n}</span>{title}
-    </h3>
-  )
-  const daysValid = Number(values.days_left) >= dMin && Number(values.days_left) <= dMax
+  const fmtHM = (h) => `${hoursToHM(h).h}h ${hoursToHM(h).m}m`
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-label="Fare estimate form" className="space-y-7">
-      <section aria-labelledby="route-h" className="space-y-4">
-        <div className="flex items-center justify-between gap-3">
-          {step('01', 'route-h', 'Route')}
-          <button type="button" onClick={swapRoute} disabled={!values.source || !values.destination} aria-label="Swap origin and destination"
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/10 px-3.5 text-sm font-semibold text-mist transition hover:border-cyan/50 hover:text-cyan disabled:cursor-not-allowed disabled:opacity-40">
-            <ArrowLeftRight aria-hidden="true" className="h-4 w-4" />Swap
-          </button>
-        </div>
+    <form onSubmit={handleSubmit} noValidate aria-label="Fare estimate form" className="space-y-9">
+      <Group id="route-h" title="Route" action={
+        <button type="button" onClick={swapRoute} disabled={!values.source || !values.destination} aria-label="Swap origin and destination"
+          className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-white/12 px-4 text-sm font-semibold text-mist transition hover:border-cyan/60 hover:text-cyan disabled:cursor-not-allowed disabled:opacity-40">
+          <ArrowLeftRight aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-enabled:group-hover:rotate-180" />Swap
+        </button>
+      }>
         <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2">
           <Field id="source" label="From" error={show('source')}>
             {(p) => <SelectInput {...p} options={cities} placeholder="Select origin" value={values.source} onChange={(e) => update('source', e.target.value)} onBlur={blur('source')} />}
@@ -114,10 +127,9 @@ export default function PredictionForm({ options, onSubmit, onDirty, submitting 
             )}
           </Field>
         </div>
-      </section>
+      </Group>
 
-      <section aria-labelledby="flight-h" className="space-y-4">
-        {step('02', 'flight-h', 'Flight')}
+      <Group id="flight-h" title="Flight">
         <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2">
           <Field id="airline" label="Airline" hint={values.source && values.destination && !airlines.length ? 'No airline serves this route in the data.' : undefined} error={show('airline')}>
             {(p) => (
@@ -134,75 +146,66 @@ export default function PredictionForm({ options, onSubmit, onDirty, submitting 
         </div>
 
         <fieldset className="min-w-0">
-          <legend className="mb-1.5 text-sm font-semibold text-mist">Stops</legend>
-          <div className="grid grid-cols-3 gap-1 rounded-xl border border-white/10 bg-night-850/80 p-1">
+          <legend className="mb-2 text-sm font-semibold text-mist">Stops</legend>
+          <div className="grid grid-cols-3 gap-1 rounded-full border border-white/10 bg-night-950/55 p-1">
             {options.stops.map((s) => (
-              <label key={s} className="relative flex min-h-11 cursor-pointer items-center justify-center rounded-lg px-2 text-center text-sm font-semibold text-mist transition hover:text-ink has-[:checked]:bg-[linear-gradient(135deg,rgb(76_141_255/0.28),rgb(63_208_238/0.16))] has-[:checked]:text-ink has-[:checked]:shadow-[inset_0_0_0_1px_rgb(63_208_238/0.45)] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-cyan">
+              <label key={s} className="relative flex min-h-11 cursor-pointer items-center justify-center rounded-full px-2 text-center text-sm font-semibold text-mist transition hover:text-ink has-[:checked]:bg-cyan has-[:checked]:text-night-950 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-cyan">
                 <input type="radio" name="stops" value={s} checked={values.stops === s} onChange={() => update('stops', s)} className="sr-only" />
                 {STOPS_LABEL[s] ?? s}
               </label>
             ))}
           </div>
-          {show('stops') && <p className="mt-1.5 text-sm font-medium text-danger">{show('stops')}</p>}
+          {show('stops') && <FieldError>{show('stops')}</FieldError>}
         </fieldset>
-      </section>
 
-      <section aria-labelledby="timing-h" className="space-y-4">
-        {step('03', 'timing-h', 'Timing')}
-        <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2">
-          <Field id="departure_time" label="Departure time" hint="Accepted, but this model version does not use it, so it does not change the estimate." error={show('departure_time')}>
-            {(p) => <input {...p} type="time" className={inputClass} value={values.departure_time} onChange={(e) => update('departure_time', e.target.value)} onBlur={blur('departure_time')} />}
-          </Field>
-
-          <div role="group" aria-labelledby="duration-label" aria-describedby="duration-hint duration-error" className="min-w-0">
-            <span id="duration-label" className="mb-1.5 block text-sm font-semibold text-mist">Total flight duration</span>
-            <div className="grid grid-cols-2 gap-3">
-              {[['durH', 'Hours', 'h'], ['durM', 'Minutes', 'm']].map(([k, label, unit]) => (
-                <div key={k} className="relative">
-                  <input id={k} aria-label={label} aria-invalid={show('duration') ? true : undefined} inputMode="numeric" autoComplete="off" placeholder="0"
-                    className={`${inputClass} pr-9 font-mono`} value={values[k]} onChange={(e) => updateDuration(k, e.target.value)} onBlur={blur('duration')} />
-                  <span aria-hidden="true" className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 font-mono text-fog">{unit}</span>
-                </div>
-              ))}
-            </div>
-            <p id="duration-hint" className="mt-1.5 text-[0.8125rem] leading-snug text-fog">
-              {hint ? <>Typical for this route: {hoursToHM(hint.typical).h}h {hoursToHM(hint.typical).m}m. </> : null}
-              Supported: {hoursToHM(range[0]).h}h {hoursToHM(range[0]).m}m to {hoursToHM(range[1]).h}h {hoursToHM(range[1]).m}m.
-              {hint && durationEdited && (
-                <button type="button" onClick={useTypicalDuration} className="ml-1 font-semibold text-cyan underline underline-offset-2">Use typical</button>
-              )}
-            </p>
-            {show('duration') && <p id="duration-error" className="mt-1.5 text-sm font-medium text-danger">{show('duration')}</p>}
+        <div role="group" aria-labelledby="duration-label" aria-describedby="duration-hint duration-error" className="min-w-0">
+          <span id="duration-label" className="mb-2 block text-sm font-semibold text-mist">Total flight duration</span>
+          <div className="grid grid-cols-2 gap-3">
+            {[['durH', 'Hours', 'h'], ['durM', 'Minutes', 'm']].map(([k, label, unit]) => (
+              <div key={k} className="relative">
+                <input id={k} aria-label={label} aria-invalid={show('duration') ? true : undefined} inputMode="numeric" autoComplete="off" placeholder="0"
+                  className={`${inputClass} pr-10 tabular`} value={values[k]} onChange={(e) => updateDuration(k, e.target.value)} onBlur={blur('duration')} />
+                <span aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-fog">{unit}</span>
+              </div>
+            ))}
           </div>
+          <p id="duration-hint" className="mt-2 text-[0.8125rem] leading-snug text-fog">
+            {hint ? <>Typical for this route: {fmtHM(hint.typical)}. </> : null}
+            Supported: {fmtHM(range[0])} to {fmtHM(range[1])}.
+            {hint && durationEdited && (
+              <button type="button" onClick={useTypicalDuration} className="ml-1 font-semibold text-cyan underline underline-offset-2">Use typical</button>
+            )}
+          </p>
+          {show('duration') && <FieldError id="duration-error">{show('duration')}</FieldError>}
         </div>
+      </Group>
 
-        <Field id="days_left" label="Days before departure" hint={`Supported lead time: ${dMin} to ${dMax} days.`} error={show('days_left')}>
-          {(p) => (
-            <div className="space-y-3">
-              <div className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-center gap-4">
-                <input {...p} type="number" inputMode="numeric" min={dMin} max={dMax} step="1" className={`${inputClass} font-mono`} value={values.days_left}
-                  onChange={(e) => update('days_left', e.target.value)} onBlur={blur('days_left')} />
-                <input type="range" aria-label="Days before departure (slider)" min={dMin} max={dMax} step="1" className="h-12 w-full cursor-pointer accent-[#3fd0ee]"
-                  value={daysValid ? values.days_left : dMin} onChange={(e) => update('days_left', e.target.value)} />
-              </div>
-              <div className="flex flex-wrap gap-2" role="group" aria-label="Lead time presets">
-                {[3, 7, 14, 30, 45].map((d) => (
-                  <button key={d} type="button" onClick={() => update('days_left', String(d))} aria-pressed={String(d) === String(values.days_left)}
-                    className="min-h-11 rounded-full border border-white/10 px-4 font-mono text-[0.8125rem] text-mist transition hover:border-white/25 hover:text-ink aria-pressed:border-cyan/50 aria-pressed:bg-cyan/10 aria-pressed:text-cyan">
-                    {d}d
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+      <Group id="timing-h" title="When">
+        <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+          <div className="min-w-0">
+            <label htmlFor="travel_date" className="mb-2 block text-sm font-semibold text-mist">Travel date</label>
+            <input id="travel_date" type="date" className={`${inputClass} tabular`} min={dateFromToday(dMin)} max={dateFromToday(dMax)}
+              value={daysValid ? dateFromToday(days) : ''} aria-describedby="travel_date-hint" aria-invalid={show('days_left') ? true : undefined}
+              onChange={(e) => updateDate(e.target.value)} onBlur={blur('days_left')} />
+            <p id="travel_date-hint" className="mt-2 text-[0.8125rem] leading-snug text-fog">The model uses how many days ahead you book, not the calendar date.</p>
+          </div>
+          <Field id="days_left" label="Days before departure" hint={`Supported lead time: ${dMin} to ${dMax} days.`} error={show('days_left')}>
+            {(p) => (
+              <input {...p} type="number" inputMode="numeric" min={dMin} max={dMax} step="1" className={`${inputClass} tabular`} value={values.days_left}
+                onChange={(e) => update('days_left', e.target.value)} onBlur={blur('days_left')} />
+            )}
+          </Field>
+        </div>
+        <Field id="departure_time" label="Departure time" hint="Accepted, but this model version does not use it, so it does not change the estimate." error={show('departure_time')}>
+          {(p) => <input {...p} type="time" className={`${inputClass} tabular min-[480px]:max-w-[14rem]`} value={values.departure_time} onChange={(e) => update('departure_time', e.target.value)} onBlur={blur('departure_time')} />}
         </Field>
-      </section>
+      </Group>
 
-      <div className="flex flex-col gap-3 border-t border-white/[0.07] pt-6 sm:flex-row">
-        <Button type="submit" disabled={submitting} aria-busy={submitting} className="w-full sm:flex-1">
+      <div className="flex flex-col gap-3 border-t border-white/[0.08] pt-7 sm:flex-row">
+        <Button type="submit" disabled={submitting} aria-busy={submitting} className="min-h-14 w-full text-[1.0625rem] sm:flex-1">
           {submitting ? <><Spinner /> Estimating…</> : <><Plane aria-hidden="true" className="h-5 w-5" /> Estimate fare</>}
         </Button>
-        <Button type="button" variant="secondary" onClick={handleReset} disabled={submitting} className="w-full sm:w-auto">Reset</Button>
+        <Button type="button" variant="secondary" onClick={handleReset} disabled={submitting} className="min-h-14 w-full sm:w-auto">Reset</Button>
       </div>
     </form>
   )

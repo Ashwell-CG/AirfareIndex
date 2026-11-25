@@ -10,11 +10,13 @@ import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const shots = resolve(here, '../../docs/screenshots/phase8')
+// E2E_TAG=<name> writes to docs/screenshots/<name> and docs/<name>-crossbrowser-results.json instead of the Phase 8 records
+const tag = process.env.E2E_TAG
+const shots = resolve(here, `../../docs/screenshots/${tag || 'phase8'}`)
 mkdirSync(shots, { recursive: true })
 const base = process.argv[2] || 'http://localhost:4173'
 const only = process.argv[3]
-const outFile = resolve(here, '../../docs/08-crossbrowser-results.json')
+const outFile = resolve(here, tag ? `../../docs/${tag}-crossbrowser-results.json` : '../../docs/08-crossbrowser-results.json')
 
 const BROWSERS = [
   { name: 'chrome', browser: 'chrome', path: 'C:/Program Files/Google/Chrome/Application/chrome.exe' },

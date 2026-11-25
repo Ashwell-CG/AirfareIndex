@@ -13,8 +13,8 @@ export default function AircraftPoster({ className = '' }) {
           <stop offset="1" stopColor="#0a1a36" />
         </linearGradient>
         <radialGradient id="ap-glow" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#3fd0ee" stopOpacity="0.18" />
-          <stop offset="1" stopColor="#3fd0ee" stopOpacity="0" />
+          <stop offset="0" stopColor="#62d4ee" stopOpacity="0.18" />
+          <stop offset="1" stopColor="#62d4ee" stopOpacity="0" />
         </radialGradient>
       </defs>
       <ellipse cx="330" cy="140" rx="320" ry="120" fill="url(#ap-glow)" />
@@ -22,10 +22,10 @@ export default function AircraftPoster({ className = '' }) {
       <path d="M300 128 L 392 70 L 418 70 L 352 128 Z" fill="#9aa8bd" opacity="0.7" />
       {/* fin */}
       <path d="M98 100 L 62 26 L 96 26 L 168 100 Z" fill="url(#ap-navy)" />
-      <path d="M104 86 L 84 50 L 98 50 L 124 86 Z" fill="#3fd0ee" opacity="0.9" />
+      <path d="M104 86 L 84 50 L 98 50 L 124 86 Z" fill="#62d4ee" opacity="0.9" />
       {/* fuselage */}
       <path d="M52 108 C 60 98 92 94 126 94 L 500 94 C 552 94 592 104 612 120 C 594 134 552 142 500 142 L 140 142 C 100 142 68 132 52 118 Z" fill="url(#ap-skin)" />
-      <path d="M150 124 L 500 124" stroke="#3fd0ee" strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M150 124 L 500 124" stroke="#62d4ee" strokeWidth="2.4" strokeLinecap="round" />
       <path d="M160 110 L 490 110" stroke="#0b1628" strokeWidth="5" strokeDasharray="3.5 8.5" strokeLinecap="round" />
       <path d="M560 104 L 584 108 L 590 114 L 566 112 Z" fill="#0b1628" />
       {/* stabiliser */}
@@ -33,7 +33,7 @@ export default function AircraftPoster({ className = '' }) {
       {/* near wing + engine */}
       <path d="M318 128 L 236 196 L 262 196 L 368 132 Z" fill="#b9c4d4" />
       <rect x="292" y="146" width="88" height="26" rx="13" fill="url(#ap-navy)" />
-      <rect x="368" y="149" width="10" height="20" rx="5" fill="#3fd0ee" opacity="0.85" />
+      <rect x="368" y="149" width="10" height="20" rx="5" fill="#62d4ee" opacity="0.85" />
     </svg>
   )
 }

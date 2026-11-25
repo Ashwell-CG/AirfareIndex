@@ -44,7 +44,7 @@ export default function Clouds({ count = 24, animate = true, speed = 1 }) {
         tint: far ? 0.55 + r() * 0.15 : 0.7 + r() * 0.3,
       }
     })
-    const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, opacity: 0.85, color: '#b9c9e6', fog: true })
+    const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, opacity: 0.72, color: '#8ea3c6', fog: true }) // moonlit, not daylight
     return { tex, geom: new THREE.PlaneGeometry(1, 1), mat, items }
   }, [count])
 
